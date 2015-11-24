@@ -11,9 +11,9 @@ import com.zxh.q.zlibrary.R;
  * Created by jkt-yf-002 on 2015/9/14.
  * @author zhangxh
  */
-public class LoadingDialog extends Dialog{
+public class BaseDialog extends Dialog{
     private Context context;
-    private static LoadingDialog loaddialog;
+    private static BaseDialog loaddialog;
     private TextView title;
     private TextView message;
     private TextView leftbtn;
@@ -21,7 +21,7 @@ public class LoadingDialog extends Dialog{
     private OnClickListener leftonclick;
     private OnClickListener rightonclick;
 
-    public LoadingDialog(Context context) {
+    public BaseDialog(Context context) {
         super(context);
         this.context = context;
 
@@ -53,17 +53,17 @@ public class LoadingDialog extends Dialog{
             }
         });
     }
-    public static LoadingDialog getDialog(Context context) {
-        loaddialog = new LoadingDialog(context);
+    public static BaseDialog getDialog(Context context) {
+        loaddialog = new BaseDialog(context);
         return loaddialog;
     }
 
-    public LoadingDialog setLeftonclick(OnClickListener leftonclick) {
+    public BaseDialog setLeftonclick(OnClickListener leftonclick) {
         this.leftonclick = leftonclick;
         return loaddialog;
     }
 
-    public LoadingDialog setRightonclick(OnClickListener rightonclick) {
+    public BaseDialog setRightonclick(OnClickListener rightonclick) {
         this.rightonclick = rightonclick;
         return loaddialog;
     }
@@ -73,7 +73,7 @@ public class LoadingDialog extends Dialog{
      * @param text
      * @return
      */
-    public LoadingDialog settitle(String text){
+    public BaseDialog settitle(String text){
         title.setText(text);
         return loaddialog;
     }
@@ -83,7 +83,7 @@ public class LoadingDialog extends Dialog{
      * @param msg
      * @return
      */
-    public LoadingDialog setmessage(String msg){
+    public BaseDialog setmessage(String msg){
         message.setText(msg);
         return loaddialog;
     }
@@ -93,7 +93,7 @@ public class LoadingDialog extends Dialog{
      * @param t
      * @return
      */
-    public LoadingDialog setleftbtntext(String t){
+    public BaseDialog setleftbtntext(String t){
         leftbtn.setText(t);
         return loaddialog;
     }
@@ -103,7 +103,7 @@ public class LoadingDialog extends Dialog{
      * @param t
      * @return
      */
-    public LoadingDialog setrightbtntext(String t){
+    public BaseDialog setrightbtntext(String t){
         rightbtn.setText(t);
         return loaddialog;
     }

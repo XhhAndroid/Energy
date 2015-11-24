@@ -70,7 +70,7 @@ public class FrgRobot extends BaseFragment {
         }.getType();
         String url = "http://op.juhe.cn/robot/index";
         Http http = new Http(getActivity());
-        http.Z(url, params, new Httpinterface() {
+        http.http(url, params, new Httpinterface() {
             String msg = "";
 
             @Override

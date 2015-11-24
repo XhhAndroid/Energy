@@ -92,7 +92,7 @@ public class FrgPositiveNews extends BaseFragment {
             url = "http://op.juhe.cn/onebox/news/query";
         }
         Http http = new Http(getActivity());
-        http.Z(url, params, new Httpinterface() {
+        http.http(url, params, new Httpinterface() {
             @Override
             public void Success(String response) {
                 if (!StringZ.Isempty(response)) {
