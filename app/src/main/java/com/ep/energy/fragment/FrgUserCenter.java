@@ -49,8 +49,8 @@ public class FrgUserCenter extends BaseFragment {
 
         List<Integer> textsizelist = new ArrayList<>();
         textsizelist.add(14);
-        textsizelist.add(14);
-        textsizelist.add(14);
+        textsizelist.add(17);
+        textsizelist.add(12);
 
         ztextview.setdata(textsizelist, textlist,textcolorlist);
 
