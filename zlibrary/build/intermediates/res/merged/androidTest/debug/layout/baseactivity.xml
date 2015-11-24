@@ -1,0 +1,10 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:minHeight="40dp"
+    android:background="#fff"
+    android:orientation="vertical">
+
+</LinearLayout>
+<!-- From: file:/E:/studioworkspace/Energy/zlibrary/src/main/res/layout/baseactivity.xml --><!-- From: file:/E:/studioworkspace/Energy/zlibrary/build/intermediates/bundles/debug/res/layout/baseactivity.xml -->

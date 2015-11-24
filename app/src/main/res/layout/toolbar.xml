@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/m_toolbar"
+    app:contentInsetLeft="0dp"
+    app:contentInsetStart="0dp"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="?attr/colorPrimary"
+    android:elevation="5dp"
+    android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:gravity="center"
+        android:minHeight="40dp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/left_rel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.4"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/e_back" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/middle_rel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/middle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EP标榜"
+                android:textColor="#EA8010"
+                android:textSize="15sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/right_rel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.4"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/e_next" />
+        </RelativeLayout>
+    </LinearLayout>
+</android.support.v7.widget.Toolbar>

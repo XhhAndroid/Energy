@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources >
+    <color name="white">#FFFFFF</color>
+    <color name="theme_btn_press">#F8EDE2</color>
+    <color name="holo_blue">#FF33E5B5</color>
+    <color name="theme_color">#EA8010</color>
+</resources>

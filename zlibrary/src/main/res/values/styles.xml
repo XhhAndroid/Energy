@@ -1,0 +1,15 @@
+<resources>
+    <style name="ActionBarBaseStyle" parent="@style/Widget.AppCompat.ActionBar">
+        <item name="android:icon">@android:color/transparent</item>
+        <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetEnd">0dp</item>
+        <item name="titleMargins">0dp</item>
+        <item name="android:background">#ffffff</item>
+    </style>
+    <style name="CustomActionBar" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:actionBarStyle">@style/CustmActionBarStyle</item>
+    </style>
+    <style name="CustmActionBarStyle" parent="android:Widget.ActionBar">
+        <item name="android:background">@color/white</item>
+    </style>
+</resources>
