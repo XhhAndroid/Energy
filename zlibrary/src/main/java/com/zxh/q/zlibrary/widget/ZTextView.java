@@ -89,6 +89,7 @@ public class ZTextView extends TextView {
                 mPaint.getTextBounds(mText, 0, mText.length(), mBound);
                 tb.paint = mPaint;
                 tb.text = mText;
+                tb.size = mPaint.getTextSize();
                 tb.color = mPaint.getColor();
                 tb.rect = mBound;
 
@@ -110,14 +111,16 @@ public class ZTextView extends TextView {
         Paint p = new Paint();
         p.setColor(Color.WHITE);
         canvas.drawRect(0, 0, getMeasuredWidth(), getMeasuredHeight(), p);
-        int i = 0;
+        float left = paddingleft;
+        Rect lRect = new Rect();
         for (TextBean textBean : paiintlist) {
             textBean.paint.setColor(textBean.color);
+            textBean.paint.setTextSize(textBean.size);
+            left += lRect.width();
             canvas.drawText(textBean.text,
-                    paddingleft + textBean.rect.width() * i,getHeight() / 2 + textBean.rect.height() / 2,
+                    left, getHeight() / 2 + textBean.rect.height() / 2,
                     textBean.paint);
-
-            i++;
+            lRect = textBean.rect;
         }
     }
 
@@ -126,6 +129,15 @@ public class ZTextView extends TextView {
         Rect rect;
         String text;
         int color;
+        float size;
+
+        public float getSize() {
+            return size;
+        }
+
+        public void setSize(float size) {
+            this.size = size;
+        }
 
         public Rect getRect() {
             return rect;

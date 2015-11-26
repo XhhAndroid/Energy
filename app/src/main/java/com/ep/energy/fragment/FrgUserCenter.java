@@ -23,8 +23,8 @@ import butterknife.ButterKnife;
 public class FrgUserCenter extends BaseFragment {
     @Bind(R.id.reputation)
     TextView reputation;
-    @Bind(R.id.ztextview)
-    ZTextView ztextview;
+//    @Bind(R.id.ztextview)
+//    ZTextView ztextview;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -52,7 +52,7 @@ public class FrgUserCenter extends BaseFragment {
         textsizelist.add(17);
         textsizelist.add(12);
 
-        ztextview.setdata(textsizelist, textlist,textcolorlist);
+//        ztextview.setdata(textsizelist, textlist,textcolorlist);
 
         reputation.setOnClickListener(new View.OnClickListener() {
             @Override

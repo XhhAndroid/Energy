@@ -1,6 +1,7 @@
 package com.ep.energy;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,7 +41,6 @@ public class MainActivity extends BaseActivity implements PageChange {
     PageSwitchViewpager mJazzy;
 
     private List<ViewBean> viewlist = new ArrayList<>();
-    private ViewAdapter viewAdapter;
 
     private int viewl[] = {R.layout.positiveenergy, R.layout.positivemap,
             R.layout.positivenews, R.layout.robot, R.layout.usercenter};
@@ -52,17 +52,18 @@ public class MainActivity extends BaseActivity implements PageChange {
         ButterKnife.bind(this);
 
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) actionBar.setDisplayShowTitleEnabled(false);
 
         setupJazziness(PageSwitchViewpager.TransitionEffect.Tablet);
 
         myToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.left_rel:
                         ToastZ.Toastz(MainActivity.this, "向左");
-                    break;
+                        break;
                 }
                 return true;
             }
@@ -71,7 +72,7 @@ public class MainActivity extends BaseActivity implements PageChange {
 
     private void setupJazziness(PageSwitchViewpager.TransitionEffect effect) {
         mJazzy.setTransitionEffect(effect);
-        viewAdapter = new ViewAdapter(MainActivity.this, mJazzy, ViewList());
+        ViewAdapter viewAdapter = new ViewAdapter(MainActivity.this, mJazzy, ViewList());
         viewAdapter.setPagechange(this);
         mJazzy.setAdapter(viewAdapter);
         mJazzy.setPageMargin(1);
@@ -79,9 +80,9 @@ public class MainActivity extends BaseActivity implements PageChange {
     }
 
     private List<ViewBean> ViewList() {
-        for (int i = 0; i < viewl.length; i++) {
+        for (int aViewl : viewl) {
             ViewBean viewBean = new ViewBean();
-            viewBean.setViewroot(viewl[i]);
+            viewBean.setViewroot(aViewl);
             viewlist.add(viewBean);
         }
         return viewlist;
@@ -112,6 +113,7 @@ public class MainActivity extends BaseActivity implements PageChange {
                 break;
         }
     }
+
     private void show(int i) {
         switch (i) {
             case 1:

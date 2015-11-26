@@ -21,11 +21,17 @@
             style="@style/tvsetting"
             android:background="@drawable/them_tvbutton_bg"
             android:text="我的信用" />
-        <com.zxh.q.zlibrary.widget.ZTextView
-            android:id="@+id/ztextview"
+        <com.zxh.q.zlibrary.widget.ZEditText
+            android:id="@+id/zedittext"
             android:layout_marginTop="1dp"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            mtext:mPaddingleft="10dp"/>
+            android:drawableRight="@mipmap/delete"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:background="#fff"
+            android:gravity="center_vertical"
+            android:textCursorDrawable="@color/theme_color"
+            mtext:mPaddingleft="5dp"/>
     </LinearLayout>
 </LinearLayout>
