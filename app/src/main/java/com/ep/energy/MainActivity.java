@@ -114,6 +114,7 @@ public class MainActivity extends BaseActivity implements PageChange {
         }
     }
 
+    /**控制标题栏图标*/
     private void show(int i) {
         switch (i) {
             case 1:
