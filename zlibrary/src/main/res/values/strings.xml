@@ -18,6 +18,13 @@
         <item>Accordion</item>
     </string-array>
 
+    <!-- 图片选择dialog activity -->
+    <string name="label_dialog_activity_name">选择图片</string>
+    <string name="tips_choose_open_way">请选择一种方式来完成动作</string>
+    <string name="btn_gallery">相册</string>
+    <string name="btn_camera">拍照</string>
+    <string name="hint_base_dialog_input">"请输入内容"</string>
+
     <!-- listview相关-->
     <string name="pushmsg_center_no_more_msg">已经到底啦</string>
     <string name="pushmsg_center_pull_up_text">松开加载更多</string>
