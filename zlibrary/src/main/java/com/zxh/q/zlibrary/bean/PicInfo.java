@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class PicInfo implements Serializable {
 
     /**
-     * @Fields serialVersionUID : TODO(用一句话描述这个变量表示�?�?)
+     * @Fields serialVersionUID : TODO(用一句话描述这个变量表示)
      */
     private static final long serialVersionUID = 3272861379671779288L;
 
