@@ -23,5 +23,5 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile project(':zlibrary')
-    compile files('libs/butterknife-7.0.1.jar')
+    compile 'com.squareup.okhttp3:okhttp:3.3.1'
 }
