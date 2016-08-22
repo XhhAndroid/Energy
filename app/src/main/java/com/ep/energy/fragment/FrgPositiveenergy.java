@@ -1,17 +1,23 @@
 package com.ep.energy.fragment;
 
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TableLayout;
-import android.widget.TextView;
+import android.widget.ListView;
 
 import com.ep.energy.R;
+import com.ep.energy.adapter.EnergyAdapter;
+import com.ep.energy.bean.PositivityModel;
+import com.ep.energy.http.OkHttpManager;
+import com.ep.energy.http.ValueParam;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.zxh.q.zlibrary.BaseFragment;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -21,35 +27,70 @@ import butterknife.ButterKnife;
  * Created by Administrator on 2015/10/24.
  */
 public class FrgPositiveenergy extends BaseFragment {
-    @Bind(R.id.tableLayout)
-    TableLayout tableLayout;
-    @Bind(R.id.viewPager)
-    ViewPager viewPager;
+    @Bind(R.id.listview)
+    ListView listview;
 
-    private ArrayList<String> titleContainer = new ArrayList<>();
+    private int curPage = 1;
+    private int PageSize = 15;
+
+    private EnergyAdapter energyAdapter;
+    private List<PositivityModel.ResultBean.ListBean> positivityList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.e_positiveenergy, container, false);
-
-        initdata();
-
         ButterKnife.bind(this, layout);
+
+        getEnergyData(true);
+        initAdapter();
+
         return layout;
     }
 
-    private void initdata() {
-        titleContainer.add("列表一");
-        titleContainer.add("列表二");
-        titleContainer.add("列表三");
-        titleContainer.add("列表四");
+    private void initAdapter() {
+        energyAdapter = new EnergyAdapter(getActivity());
+        energyAdapter.setList(positivityList);
+        listview.setAdapter(energyAdapter);
+    }
 
-        for (int i = 0 ; i< titleContainer.size() ; i ++) {
-            String str = titleContainer.get(i);
-            TextView tv = new TextView(mcontext);
-            tv.setText(str);
-            tableLayout.addView(tv);
-        }
+    /**
+     * 获取数据
+     */
+    private void getEnergyData(final boolean fresh) {
+        String url = "http://v.juhe.cn/weixin/query";
+        List<ValueParam> params = new ArrayList<>();
+        params.add(new ValueParam("pno", String.valueOf(curPage)));
+        params.add(new ValueParam("ps", String.valueOf(PageSize)));
+        params.add(new ValueParam("key", ""));
+        OkHttpManager.okHttpCall_POST(url, params, new OkHttpManager.HttpListner() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onSuccess(String response) {
+                Gson gson = new Gson();
+                Type type = new TypeToken<PositivityModel>() {
+                }.getType();
+                PositivityModel positivityModel = gson.fromJson(response, type);
+                if (positivityModel != null) {
+                    if (fresh) {
+                        positivityList.clear();
+                        energyAdapter.notifyDataSetChanged();
+                    }
+                    if (positivityModel.getError_code() == 0) {
+                        positivityList.addAll(positivityModel.getResult().getList());
+                        energyAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+
+            @Override
+            public void onFail(String message) {
+
+            }
+        });
     }
 
     @Override
