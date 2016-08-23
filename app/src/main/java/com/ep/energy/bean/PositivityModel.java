@@ -6,6 +6,7 @@ import java.util.List;
  * Created by zhangxiaohui on 2016/8/22.
  */
 public class PositivityModel extends BaseModel{
+
     private String reason;
     private ResultBean result;
     private int error_code;
@@ -39,12 +40,12 @@ public class PositivityModel extends BaseModel{
         private int ps;
         private int pno;
         /**
-         * id : wechat_20150401071581
-         * title : 号外：集宁到乌兰花的班车出事了！！！！！
-         * source : 内蒙那点事儿
-         * firstImg : http://zxpic.gtimg.com/infonew/0/wechat_pics_-214279.jpg/168
+         * firstImg : http://zxpic.gtimg.com/infonew/0/wechat_pics_-7609075.jpg/640
+         * id : wechat_20160823022039
+         * source : 大众影评网
+         * title : 《青云志》“田不易”戏里女儿精灵戏外女儿可爱
+         * url : http://v.juhe.cn/weixin/redirect?wid=wechat_20160823022039
          * mark :
-         * url : http://v.juhe.cn/weixin/redirect?wid=wechat_20150401071581
          */
 
         private List<ListBean> list;
@@ -82,12 +83,20 @@ public class PositivityModel extends BaseModel{
         }
 
         public static class ListBean {
-            private String id;
-            private String title;
-            private String source;
             private String firstImg;
-            private String mark;
+            private String id;
+            private String source;
+            private String title;
             private String url;
+            private String mark;
+
+            public String getFirstImg() {
+                return firstImg;
+            }
+
+            public void setFirstImg(String firstImg) {
+                this.firstImg = firstImg;
+            }
 
             public String getId() {
                 return id;
@@ -95,14 +104,6 @@ public class PositivityModel extends BaseModel{
 
             public void setId(String id) {
                 this.id = id;
-            }
-
-            public String getTitle() {
-                return title;
-            }
-
-            public void setTitle(String title) {
-                this.title = title;
             }
 
             public String getSource() {
@@ -113,20 +114,12 @@ public class PositivityModel extends BaseModel{
                 this.source = source;
             }
 
-            public String getFirstImg() {
-                return firstImg;
+            public String getTitle() {
+                return title;
             }
 
-            public void setFirstImg(String firstImg) {
-                this.firstImg = firstImg;
-            }
-
-            public String getMark() {
-                return mark;
-            }
-
-            public void setMark(String mark) {
-                this.mark = mark;
+            public void setTitle(String title) {
+                this.title = title;
             }
 
             public String getUrl() {
@@ -135,6 +128,14 @@ public class PositivityModel extends BaseModel{
 
             public void setUrl(String url) {
                 this.url = url;
+            }
+
+            public String getMark() {
+                return mark;
+            }
+
+            public void setMark(String mark) {
+                this.mark = mark;
             }
         }
     }

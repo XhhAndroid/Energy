@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.zxh.q.zlibrary.BaseActivity;
 import com.zxh.q.zlibrary.bean.ViewBean;
 import com.zxh.q.zlibrary.utils.ToastZ;
 import com.zxh.q.zlibrary.view.PageSwitchViewpager;

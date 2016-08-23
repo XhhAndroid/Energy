@@ -7,9 +7,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ep.energy.R;
-import com.zxh.q.zlibrary.BaseFragment;
+import com.ep.energy.BaseFragment;
 import com.zxh.q.zlibrary.utils.ToastZ;
-import com.zxh.q.zlibrary.widget.ZTextView;
 
 import java.util.ArrayList;
 import java.util.List;

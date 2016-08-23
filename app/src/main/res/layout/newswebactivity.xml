@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="false"
     android:orientation="vertical">
-    <ListView
-        android:id="@+id/listview"
+    <WebView
+        android:id="@+id/webview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:dividerHeight="7dp"
-        android:divider="@android:color/transparent"/>
+        android:layout_height="match_parent"/>
 </LinearLayout>

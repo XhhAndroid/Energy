@@ -1,6 +1,7 @@
 package com.ep.energy;
 
 import android.app.Application;
+import android.content.Context;
 
 import java.io.IOException;
 
@@ -16,11 +17,27 @@ import okhttp3.Response;
  */
 public class EApplication extends Application {
     public static OkHttpClient okHttpClient;
+    private static Context context;
+    private static EApplication eApplication;
+
+    public EApplication() {}
+
+    public static EApplication getInstance() {
+        if(eApplication == null){
+            eApplication = new EApplication();
+        }
+        return eApplication;
+    }
+
+    public static Context getContext(){
+        return context;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
 
+        context = getContext();
         initRequest();
     }
 

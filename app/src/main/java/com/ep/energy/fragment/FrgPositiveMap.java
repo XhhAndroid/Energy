@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ep.energy.R;
-import com.zxh.q.zlibrary.BaseFragment;
+import com.ep.energy.BaseFragment;
 
 /**
  * Created by Administrator on 2015/10/24.

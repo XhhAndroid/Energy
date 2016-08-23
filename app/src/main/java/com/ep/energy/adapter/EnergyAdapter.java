@@ -1,6 +1,7 @@
 package com.ep.energy.adapter;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -18,30 +19,37 @@ import butterknife.ButterKnife;
  */
 public class EnergyAdapter extends EBaseAdapter<PositivityModel.ResultBean.ListBean> {
 
-    public EnergyAdapter(Context mContext) {
-        super(mContext);
+    public EnergyAdapter( Context mContext,OnclickListner onclickListner) {
+        super(onclickListner, mContext);
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.energhlist_item, parent, false);
             holder = new ViewHolder(convertView);
             convertView.setTag(holder);
-        }else {
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        PositivityModel.ResultBean.ListBean positivityModel = (PositivityModel.ResultBean.ListBean)getItem(position);
-        if(positivityModel != null){
-            holder.positiveSor.setText("来自:"+positivityModel.getSource());
-            holder.positiveTitle.setText(positivityModel.getTitle());
-        }
+        final PositivityModel.ResultBean.ListBean positivityModel = (PositivityModel.ResultBean.ListBean) getItem(position);
         if (positivityModel != null) {
+            holder.positiveSor.setText("来自:" + positivityModel.getSource());
+            holder.positiveTitle.setText(positivityModel.getTitle());
+
             Glide.with(mContext)
-            .load(positivityModel.getUrl())
-            .into(holder.positiveImg);
+                    .load(positivityModel.getFirstImg())
+                    .placeholder(R.drawable.energy_default_img)
+                    .crossFade()
+                    .into(holder.positiveImg);
         }
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onclickListner.onClick0(v,positivityModel,position);
+            }
+        });
 
         return convertView;
     }

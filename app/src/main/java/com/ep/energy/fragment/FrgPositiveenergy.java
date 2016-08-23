@@ -1,19 +1,22 @@
 package com.ep.energy.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.ep.energy.BaseFragment;
 import com.ep.energy.R;
+import com.ep.energy.activity.NewsWebActivity;
+import com.ep.energy.adapter.EBaseAdapter;
 import com.ep.energy.adapter.EnergyAdapter;
 import com.ep.energy.bean.PositivityModel;
 import com.ep.energy.http.OkHttpManager;
 import com.ep.energy.http.ValueParam;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.zxh.q.zlibrary.BaseFragment;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -26,7 +29,7 @@ import butterknife.ButterKnife;
  * 首页
  * Created by Administrator on 2015/10/24.
  */
-public class FrgPositiveenergy extends BaseFragment {
+public class FrgPositiveenergy extends BaseFragment implements EBaseAdapter.OnclickListner<PositivityModel.ResultBean.ListBean> {
     @Bind(R.id.listview)
     ListView listview;
 
@@ -48,9 +51,10 @@ public class FrgPositiveenergy extends BaseFragment {
     }
 
     private void initAdapter() {
-        energyAdapter = new EnergyAdapter(getActivity());
+        energyAdapter = new EnergyAdapter(getActivity(), this);
         energyAdapter.setList(positivityList);
         listview.setAdapter(energyAdapter);
+
     }
 
     /**
@@ -61,7 +65,7 @@ public class FrgPositiveenergy extends BaseFragment {
         List<ValueParam> params = new ArrayList<>();
         params.add(new ValueParam("pno", String.valueOf(curPage)));
         params.add(new ValueParam("ps", String.valueOf(PageSize)));
-        params.add(new ValueParam("key", ""));
+        params.add(new ValueParam("key", "0e86536e1934ebc5bbc1c299b0bc2093"));
         OkHttpManager.okHttpCall_POST(url, params, new OkHttpManager.HttpListner() {
             @Override
             public void onStart() {
@@ -69,21 +73,26 @@ public class FrgPositiveenergy extends BaseFragment {
             }
 
             @Override
-            public void onSuccess(String response) {
-                Gson gson = new Gson();
-                Type type = new TypeToken<PositivityModel>() {
-                }.getType();
-                PositivityModel positivityModel = gson.fromJson(response, type);
-                if (positivityModel != null) {
-                    if (fresh) {
-                        positivityList.clear();
-                        energyAdapter.notifyDataSetChanged();
+            public void onSuccess(final String response) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Gson gson = new Gson();
+                        Type type = new TypeToken<PositivityModel>() {
+                        }.getType();
+                        PositivityModel positivityModel = gson.fromJson(response, type);
+                        if (positivityModel != null) {
+                            if (fresh) {
+                                positivityList.clear();
+                                energyAdapter.notifyDataSetChanged();
+                            }
+                            if (positivityModel.getError_code() == 0) {
+                                positivityList.addAll(positivityModel.getResult().getList());
+                                energyAdapter.notifyDataSetChanged();
+                            }
+                        }
                     }
-                    if (positivityModel.getError_code() == 0) {
-                        positivityList.addAll(positivityModel.getResult().getList());
-                        energyAdapter.notifyDataSetChanged();
-                    }
-                }
+                });
             }
 
             @Override
@@ -102,5 +111,24 @@ public class FrgPositiveenergy extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void onClick0(View v, PositivityModel.ResultBean.ListBean listBean, int position) {
+        if (listBean != null) {
+            startActivity(new Intent(getActivity(), NewsWebActivity.class)
+                    .putExtra(NewsWebActivity.URL, listBean.getUrl())
+                    .putExtra(NewsWebActivity.TITLE, listBean.getTitle()));
+        }
+    }
+
+    @Override
+    public void OnClick1(View v, PositivityModel.ResultBean.ListBean listBean, int position) {
+
+    }
+
+    @Override
+    public void Onclick2(View v, PositivityModel.ResultBean.ListBean listBean, int position) {
+
     }
 }

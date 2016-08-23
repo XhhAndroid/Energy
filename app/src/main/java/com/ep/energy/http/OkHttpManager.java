@@ -44,7 +44,7 @@ public class OkHttpManager {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (httpListner != null) {
-                    httpListner.onSuccess(response.toString());
+                    httpListner.onSuccess(response.body().string());
                 }
             }
         });
@@ -77,7 +77,7 @@ public class OkHttpManager {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (httpListner != null) {
-                    httpListner.onSuccess(response.toString());
+                    httpListner.onSuccess(response.body().string());
                 }
             }
         });
