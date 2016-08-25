@@ -7,4 +7,6 @@
     <color name="color969696">#969696</color>
     <color name="color646464">#646464</color>
     <color name="color323232">#323232</color>
+
+    <color name="transparent">#00000000</color>
 </resources>

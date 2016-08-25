@@ -10,8 +10,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
-import com.ep.energy.utils.SystemStatusManager;
-
 
 public class BaseActivity extends AppCompatActivity {
     long firstClickTime = 0;
@@ -22,27 +20,6 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            setTranslucentStatus(true);
-        }
-    }
-
-    @TargetApi(19)
-    protected void setTranslucentStatus(boolean on) {
-        // 需要setContentView之前调用
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            // 透明状态栏
-            getWindow().addFlags(
-                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            // 透明导航栏
-            getWindow().addFlags(
-                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-            SystemStatusManager tintManager = new SystemStatusManager(this);
-            tintManager.setStatusBarTintEnabled(true);
-            // 设置状态栏的颜色
-            tintManager.setStatusBarTintResource(R.color.theme_color);
-            getWindow().getDecorView().setFitsSystemWindows(true);
-        }
     }
 
     /**
