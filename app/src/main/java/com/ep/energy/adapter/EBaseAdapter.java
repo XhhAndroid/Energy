@@ -27,7 +27,9 @@ public class EBaseAdapter<T> extends BaseAdapter{
         this.mContext = mContext;
         inflater = LayoutInflater.from(mContext);
     }
-
+    public void addItem(T item) {
+        dataList.add(item);
+    }
     public void setList(List<T> dataList){
         this.dataList = dataList;
     }
@@ -49,12 +51,16 @@ public class EBaseAdapter<T> extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        if(position == getCount() - 2){
+            onclickListner.LoadMore();
+        }
         return convertView;
     }
 
     public interface OnclickListner<T>{
         void onClick0(View v,T t,int position);
-        void OnClick1(View v,T t,int position);
+        void OnClick1(View v, T t, int position);
         void Onclick2(View v,T t,int position);
+        void LoadMore();
     }
 }

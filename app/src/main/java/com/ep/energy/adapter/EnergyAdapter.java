@@ -25,6 +25,7 @@ public class EnergyAdapter extends EBaseAdapter<PositivityModel.ResultBean.ListB
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
+        super.getView(position,convertView,parent);
         ViewHolder holder = null;
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.energhlist_item, parent, false);

@@ -25,4 +25,10 @@
     <declare-styleable name="mTextViewStyle">
         <attr name="mPaddingleft" format="dimension"/>
     </declare-styleable>
+
+    <declare-styleable name="CirCleRefreshLayout">
+        <attr name="AniBackColor" format="color" />
+        <attr name="AniForeColor" format="color" />
+        <attr name="CircleSmaller" format="integer"/>
+    </declare-styleable>
 </resources>

@@ -10,13 +10,13 @@ import android.widget.ListView;
 import com.ep.energy.BaseFragment;
 import com.ep.energy.R;
 import com.ep.energy.activity.NewsWebActivity;
-import com.ep.energy.adapter.EBaseAdapter;
 import com.ep.energy.adapter.EnergyAdapter;
 import com.ep.energy.bean.PositivityModel;
 import com.ep.energy.http.OkHttpManager;
 import com.ep.energy.http.ValueParam;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.zxh.q.zlibrary.circlerefresh.CircleRefreshLayout;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -29,9 +29,12 @@ import butterknife.ButterKnife;
  * 首页
  * Created by Administrator on 2015/10/24.
  */
-public class FrgPositiveenergy extends BaseFragment implements EBaseAdapter.OnclickListner<PositivityModel.ResultBean.ListBean> {
+public class FrgPositiveenergy extends BaseFragment
+        implements  CircleRefreshLayout.OnCircleRefreshListener {
     @Bind(R.id.listview)
     ListView listview;
+    @Bind(R.id.refresh_layout)
+    CircleRefreshLayout refreshLayout;
 
     private int curPage = 1;
     private int PageSize = 15;
@@ -44,10 +47,15 @@ public class FrgPositiveenergy extends BaseFragment implements EBaseAdapter.Oncl
         View layout = inflater.inflate(R.layout.e_positiveenergy, container, false);
         ButterKnife.bind(this, layout);
 
+        initView();
         getEnergyData(true);
         initAdapter();
 
         return layout;
+    }
+
+    private void initView() {
+        refreshLayout.setOnRefreshListener(this);
     }
 
     private void initAdapter() {
@@ -77,6 +85,9 @@ public class FrgPositiveenergy extends BaseFragment implements EBaseAdapter.Oncl
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        if(fresh){
+                            refreshLayout.finishRefreshing();
+                        }
                         Gson gson = new Gson();
                         Type type = new TypeToken<PositivityModel>() {
                         }.getType();
@@ -114,8 +125,10 @@ public class FrgPositiveenergy extends BaseFragment implements EBaseAdapter.Oncl
     }
 
     @Override
-    public void onClick0(View v, PositivityModel.ResultBean.ListBean listBean, int position) {
-        if (listBean != null) {
+    public void onClick0(View v, Object o, int position) {
+        super.onClick0(v, o, position);
+        if (o != null) {
+            PositivityModel.ResultBean.ListBean listBean = (PositivityModel.ResultBean.ListBean) o;
             startActivity(new Intent(getActivity(), NewsWebActivity.class)
                     .putExtra(NewsWebActivity.URL, listBean.getUrl())
                     .putExtra(NewsWebActivity.TITLE, listBean.getTitle()));
@@ -123,12 +136,20 @@ public class FrgPositiveenergy extends BaseFragment implements EBaseAdapter.Oncl
     }
 
     @Override
-    public void OnClick1(View v, PositivityModel.ResultBean.ListBean listBean, int position) {
+    public void completeRefresh() {
 
     }
 
     @Override
-    public void Onclick2(View v, PositivityModel.ResultBean.ListBean listBean, int position) {
+    public void refreshing() {
+        curPage = 1;
+        getEnergyData(true);
+    }
 
+    @Override
+    public void LoadMore() {
+        super.LoadMore();
+        curPage ++;
+        getEnergyData(false);
     }
 }
