@@ -17,7 +17,7 @@ import android.widget.FrameLayout;
 import com.zxh.q.zlibrary.R;
 
 /**
- * Created by zxh on 15/7/20.
+ * Created by zhanglei on 15/7/20.
  */
 public class CircleRefreshLayout extends FrameLayout {
 

@@ -24,13 +24,14 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 首页
  * Created by Administrator on 2015/10/24.
  */
 public class FrgPositiveenergy extends BaseFragment
-        implements  CircleRefreshLayout.OnCircleRefreshListener {
+        implements CircleRefreshLayout.OnCircleRefreshListener {
     @Bind(R.id.listview)
     ListView listview;
     @Bind(R.id.refresh_layout)
@@ -82,12 +83,12 @@ public class FrgPositiveenergy extends BaseFragment
 
             @Override
             public void onSuccess(final String response) {
+                if (fresh) {
+                    refreshLayout.finishRefreshing();
+                }
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if(fresh){
-                            refreshLayout.finishRefreshing();
-                        }
                         Gson gson = new Gson();
                         Type type = new TypeToken<PositivityModel>() {
                         }.getType();
@@ -137,19 +138,19 @@ public class FrgPositiveenergy extends BaseFragment
 
     @Override
     public void completeRefresh() {
-
-    }
-
-    @Override
-    public void refreshing() {
         curPage = 1;
         getEnergyData(true);
     }
 
     @Override
+    public void refreshing() {
+
+    }
+
+    @Override
     public void LoadMore() {
         super.LoadMore();
-        curPage ++;
+        curPage++;
         getEnergyData(false);
     }
 }
