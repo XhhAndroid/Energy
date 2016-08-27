@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ep.energy.adapter.EBaseAdapter;
+import com.ep.energy.dialog.LoadingDialog;
 
 /**
  * 父fragment
@@ -16,11 +17,32 @@ import com.ep.energy.adapter.EBaseAdapter;
 public class BaseFragment extends Fragment implements EBaseAdapter.OnclickListner {
     private View view;
     public Context mcontext;
+    public LoadingDialog loadingDialog;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         mcontext = getActivity();
+        loadingDialog = new LoadingDialog(getActivity());
         return view;
+    }
+    public void showLoading(){
+        if(loadingDialog == null){
+            loadingDialog = new LoadingDialog(getActivity());
+        }
+        if(loadingDialog.isShowing()){
+            return;
+        }
+        loadingDialog.show();
+    }
+    public void dissmissLoading(){
+        if(loadingDialog == null){
+            loadingDialog = new LoadingDialog(getActivity());
+        }
+        if(!loadingDialog.isShowing()){
+            return;
+        }
+        loadingDialog.dismiss();
     }
 
     @Override

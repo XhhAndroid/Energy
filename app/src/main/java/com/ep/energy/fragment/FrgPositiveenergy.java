@@ -78,11 +78,12 @@ public class FrgPositiveenergy extends BaseFragment
         OkHttpManager.okHttpCall_POST(url, params, new OkHttpManager.HttpListner() {
             @Override
             public void onStart() {
-
+                showLoading();
             }
 
             @Override
             public void onSuccess(final String response) {
+                dissmissLoading();
                 if (fresh) {
                     refreshLayout.finishRefreshing();
                 }
@@ -109,7 +110,7 @@ public class FrgPositiveenergy extends BaseFragment
 
             @Override
             public void onFail(String message) {
-
+                dissmissLoading();
             }
         });
     }
