@@ -2,6 +2,7 @@ package com.ep.energy.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +18,15 @@ import com.ep.energy.http.ValueParam;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zxh.q.zlibrary.circlerefresh.CircleRefreshLayout;
+import com.zxh.q.zlibrary.utils.LogZ;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Handler;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * 首页
@@ -75,7 +77,7 @@ public class FrgPositiveenergy extends BaseFragment
         params.add(new ValueParam("pno", String.valueOf(curPage)));
         params.add(new ValueParam("ps", String.valueOf(PageSize)));
         params.add(new ValueParam("key", "0e86536e1934ebc5bbc1c299b0bc2093"));
-        OkHttpManager.okHttpCall_POST(url, params, new OkHttpManager.HttpListner() {
+        OkHttpManager.okHttpCall_POST(getActivity(),url, params, new OkHttpManager.HttpListner() {
             @Override
             public void onStart() {
                 showLoading();
@@ -87,25 +89,20 @@ public class FrgPositiveenergy extends BaseFragment
                 if (fresh) {
                     refreshLayout.finishRefreshing();
                 }
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Gson gson = new Gson();
-                        Type type = new TypeToken<PositivityModel>() {
-                        }.getType();
-                        PositivityModel positivityModel = gson.fromJson(response, type);
-                        if (positivityModel != null) {
-                            if (fresh) {
-                                positivityList.clear();
-                                energyAdapter.notifyDataSetChanged();
-                            }
-                            if (positivityModel.getError_code() == 0) {
-                                positivityList.addAll(positivityModel.getResult().getList());
-                                energyAdapter.notifyDataSetChanged();
-                            }
-                        }
+                Gson gson = new Gson();
+                Type type = new TypeToken<PositivityModel>() {
+                }.getType();
+                PositivityModel positivityModel = gson.fromJson(response, type);
+                if (positivityModel != null) {
+                    if (fresh) {
+                        positivityList.clear();
+                        energyAdapter.notifyDataSetChanged();
                     }
-                });
+                    if (positivityModel.getError_code() == 0) {
+                        positivityList.addAll(positivityModel.getResult().getList());
+                        energyAdapter.notifyDataSetChanged();
+                    }
+                }
             }
 
             @Override
@@ -114,12 +111,6 @@ public class FrgPositiveenergy extends BaseFragment
             }
         });
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -139,13 +130,14 @@ public class FrgPositiveenergy extends BaseFragment
 
     @Override
     public void completeRefresh() {
-        curPage = 1;
-        getEnergyData(true);
+        LogZ.e("completeRefresh");
     }
 
     @Override
     public void refreshing() {
-
+        curPage = 1;
+        getEnergyData(true);
+        LogZ.e("refreshing");
     }
 
     @Override

@@ -1,5 +1,9 @@
 package com.ep.energy.http;
 
+import android.app.Activity;
+import android.os.Handler;
+import android.os.Message;
+
 import com.ep.energy.EApplication;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -7,6 +11,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.logging.LogRecord;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -56,7 +61,7 @@ public class OkHttpManager {
      * @param url
      * @param valueParamList
      */
-    public static void okHttpCall_POST(String url,List<ValueParam> valueParamList,final HttpListner httpListner) {
+    public static void okHttpCall_POST(final Activity activity,String url, List<ValueParam> valueParamList, final HttpListner httpListner) {
         FormBody requestBody = getValueParam(valueParamList);
         Request okHttpRequest = new Request.Builder()
                 .url(url)
@@ -68,22 +73,31 @@ public class OkHttpManager {
         }
         call.enqueue(new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
-                if (httpListner != null) {
-                    httpListner.onFail(e.getMessage());
-                }
+            public void onFailure(Call call, final IOException e) {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (httpListner != null) {
+                            httpListner.onFail(e.getMessage());
+                        }
+                    }
+                });
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (httpListner != null) {
-                    httpListner.onSuccess(response.body().string());
-                }
+            public void onResponse(Call call, final Response response) throws IOException {
+                final String res = response.body().string();
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (httpListner != null) {
+                            httpListner.onSuccess(res);
+                        }
+                    }
+                });
             }
         });
-
     }
-
     private static FormBody getValueParam(List<ValueParam> valueParamList) {
         FormBody.Builder builder = new FormBody.Builder();
         if (valueParamList != null && valueParamList.size() > 0) {
