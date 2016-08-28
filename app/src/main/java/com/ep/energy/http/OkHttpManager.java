@@ -1,17 +1,11 @@
 package com.ep.energy.http;
 
 import android.app.Activity;
-import android.os.Handler;
-import android.os.Message;
 
 import com.ep.energy.EApplication;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.List;
-import java.util.logging.LogRecord;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -30,7 +24,7 @@ public class OkHttpManager {
      *
      * @param url
      */
-    public static void okHttpCall_GET(String url,final HttpListner httpListner) {
+    public static void okHttpCall_GET(String url, final HttpListner httpListner) {
         Request okHttpRequest = new Request.Builder()
                 .url(url)
                 .build();
@@ -61,7 +55,7 @@ public class OkHttpManager {
      * @param url
      * @param valueParamList
      */
-    public static void okHttpCall_POST(final Activity activity,String url, List<ValueParam> valueParamList, final HttpListner httpListner) {
+    public static void okHttpCall_POST(final Activity activity, String url, List<ValueParam> valueParamList, final HttpListner httpListner) {
         FormBody requestBody = getValueParam(valueParamList);
         Request okHttpRequest = new Request.Builder()
                 .url(url)
@@ -98,6 +92,7 @@ public class OkHttpManager {
             }
         });
     }
+
     private static FormBody getValueParam(List<ValueParam> valueParamList) {
         FormBody.Builder builder = new FormBody.Builder();
         if (valueParamList != null && valueParamList.size() > 0) {

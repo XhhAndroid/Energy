@@ -51,6 +51,8 @@ public class FrgPositiveenergy extends BaseFragment
         ButterKnife.bind(this, layout);
 
         initView();
+
+        showLoading();
         getEnergyData(true);
         initAdapter();
 
@@ -80,7 +82,6 @@ public class FrgPositiveenergy extends BaseFragment
         OkHttpManager.okHttpCall_POST(getActivity(),url, params, new OkHttpManager.HttpListner() {
             @Override
             public void onStart() {
-                showLoading();
             }
 
             @Override
