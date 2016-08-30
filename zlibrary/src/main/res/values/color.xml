@@ -4,6 +4,7 @@
     <color name="theme_color">#EA8010</color>
     <color name="theme_lin_color">#F2F2F2</color>
     <color name="white">#FFFFFF</color>
+    <color name="translate">#00000000</color>
 
     <color name="color_base_dialog_red">#ff5050</color>
 </resources>

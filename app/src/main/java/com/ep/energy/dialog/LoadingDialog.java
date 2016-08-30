@@ -20,11 +20,7 @@ public class LoadingDialog extends Dialog {
     private Context context;
 
     public LoadingDialog(Context context) {
-        this(context, 0);
-    }
-
-    public LoadingDialog(Context context, int theme) {
-        super(context, theme);
+        super(context, R.style.CustomDialog);
         this.context = context;
 
         initView(context);

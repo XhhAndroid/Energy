@@ -10,13 +10,15 @@ import android.graphics.PathMeasure;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.zxh.q.zlibrary.R;
+
 import java.util.ArrayList;
 
 /**
  * Created by DK on 2015/4/1.
  */
 public class PathTextView extends View {
-    private static final float BASE_SQUARE_UNIT = 72f;
+    private static final float BASE_SQUARE_UNIT = 80f;
     private String mText = "FUCK";
     private ArrayList<float[]> mDatas;
     private ArrayList<Path> mPaths = new ArrayList<Path>();
@@ -34,8 +36,8 @@ public class PathTextView extends View {
     public PathTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
         mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setColor(Color.BLACK);
-        mPaint.setStrokeWidth(2);
+        mPaint.setColor(context.getResources().getColor(R.color.theme_color));
+        mPaint.setStrokeWidth(5);
     }
 
 
@@ -55,7 +57,8 @@ public class PathTextView extends View {
 
         mText = text;
         mDatas = MatchPath.getPath(mText);
-        mSvgAnimator = ObjectAnimator.ofFloat(this, "phase", 0.0f, 1.0f).setDuration(3000);
+        mSvgAnimator = ObjectAnimator.ofFloat(this, "phase", 0.0f, 1.0f).setDuration(mText.length() * 500);
+        mSvgAnimator.setRepeatCount(-1);
         mSvgAnimator.start();
     }
 
@@ -77,8 +80,8 @@ public class PathTextView extends View {
         float singlefactor = mPhase * mDatas.size();
         for (int i = 0; i < mDatas.size(); i++) {
             Path path = new Path();
-            path.moveTo(mDatas.get(i)[0], mDatas.get(i)[1]);
-            path.lineTo(mDatas.get(i)[2], mDatas.get(i)[3]);
+            path.moveTo(mDatas.get(i)[0] + BASE_SQUARE_UNIT / 2, mDatas.get(i)[1] + BASE_SQUARE_UNIT / 2);
+            path.lineTo(mDatas.get(i)[2] + BASE_SQUARE_UNIT / 2, mDatas.get(i)[3] + BASE_SQUARE_UNIT / 2);
 
             if (mType == TYPE.MULTIPY) {
                 PathMeasure measure = new PathMeasure(path, false);

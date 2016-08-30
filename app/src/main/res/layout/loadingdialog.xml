@@ -3,10 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="@android:color/transparent"
     android:orientation="vertical">
     <com.zxh.q.zlibrary.widget.PathTextView
         android:id="@+id/pathTextView"
-        android:layout_width="200dp"
-        android:layout_height="70dp"/>
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"/>
 </LinearLayout>
