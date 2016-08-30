@@ -139,6 +139,13 @@ public class CircleRefreshLayout extends FrameLayout {
 //                Log.i(TAG, "should invoke");
                 mUpTopAnimator.start();
             }
+
+            @Override
+            public void startRefresh() {
+                if (onCircleRefreshListener!=null) {
+                    onCircleRefreshListener.refreshing();
+                }
+            }
         });
 
 
@@ -220,9 +227,6 @@ public class CircleRefreshLayout extends FrameLayout {
                         mUpBackAnimator.start();
                         mHeader.releaseDrag();
                         mIsRefreshing = true;
-                        if (onCircleRefreshListener!=null) {
-                            onCircleRefreshListener.refreshing();
-                        }
 
                     } else {
                         float height = mChildView.getTranslationY();

@@ -318,6 +318,10 @@ public class AnimationView extends View {
         if (!mIsRefreshing) {
             applyDone();
 
+        }else {
+            if (onViewAniDone != null) {
+                onViewAniDone.startRefresh();
+            }
         }
 
     }
@@ -504,6 +508,8 @@ public class AnimationView extends View {
 
     interface OnViewAniDone {
         void viewAniDone();
+
+        void startRefresh();
     }
 
 
