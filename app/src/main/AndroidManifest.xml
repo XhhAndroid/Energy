@@ -16,6 +16,9 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <meta-data
+            android:name="GAODE_MAP"
+            android:value="${GAODE_MAP}"/>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
