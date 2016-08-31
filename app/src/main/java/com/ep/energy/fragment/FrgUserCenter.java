@@ -6,8 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.ep.energy.R;
 import com.ep.energy.BaseFragment;
+import com.ep.energy.R;
 import com.zxh.q.zlibrary.utils.ToastZ;
 
 import java.util.ArrayList;

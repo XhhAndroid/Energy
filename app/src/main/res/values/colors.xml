@@ -8,5 +8,7 @@
     <color name="color646464">#646464</color>
     <color name="color323232">#323232</color>
 
+    <color name="line">#e1e1e1</color>
+
     <color name="transparent">#00000000</color>
 </resources>

@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Energy</string>
+    <!-- myCenter -->
+    <string name="integral">积分</string>
+    <string name="settting">设置</string>
 </resources>
