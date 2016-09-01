@@ -119,7 +119,7 @@ public class ZEditText extends EditText {
             rightDrawable = mDrawable;
         } else {
             rightDrawable = null;
-            setShakeAnimation();
+//            setShakeAnimation();
         }
         //使用代码设置该控件left, top, right, and bottom处的图标
         setCompoundDrawables(getCompoundDrawables()[0], getCompoundDrawables()[1],

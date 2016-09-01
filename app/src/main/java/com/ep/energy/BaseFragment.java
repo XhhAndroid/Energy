@@ -16,13 +16,13 @@ import com.ep.energy.dialog.LoadingDialog;
  */
 public class BaseFragment extends Fragment implements EBaseAdapter.OnclickListner {
     private View view;
-    public Context mcontext;
+    public Context mContext;
     public LoadingDialog loadingDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        mcontext = getActivity();
+        mContext = getActivity();
         loadingDialog = new LoadingDialog(getActivity());
         return view;
     }
