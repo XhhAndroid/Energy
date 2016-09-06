@@ -1,7 +1,6 @@
 package com.ep.energy.adapter;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -19,13 +18,13 @@ import butterknife.ButterKnife;
  */
 public class EnergyAdapter extends EBaseAdapter<PositivityModel.ResultBean.ListBean> {
 
-    public EnergyAdapter( Context mContext,OnclickListner onclickListner) {
+    public EnergyAdapter(Context mContext, OnclickListner onclickListner) {
         super(onclickListner, mContext);
     }
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        super.getView(position,convertView,parent);
+        super.getView(position, convertView, parent);
         ViewHolder holder = null;
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.energhlist_item, parent, false);
@@ -48,7 +47,7 @@ public class EnergyAdapter extends EBaseAdapter<PositivityModel.ResultBean.ListB
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onclickListner.onClick0(v,positivityModel,position);
+                onclickListner.onClick0(v, positivityModel, position);
             }
         });
 

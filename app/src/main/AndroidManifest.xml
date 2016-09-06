@@ -25,9 +25,6 @@
     <!--允许程序访问CellID或WiFi热点来获取粗略的位置-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
-    <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
-    <service android:name="com.amap.api.location.APSService"/>
-
     <application
         android:name=".EApplication"
         android:allowBackup="true"
@@ -50,6 +47,9 @@
             android:screenOrientation="portrait"
             android:theme="@style/ImageTranslucentTheme"
             android:windowSoftInputMode="adjustPan"/>
+
+        <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
+        <service android:name="com.amap.api.location.APSService"/>
     </application>
 
 </manifest>

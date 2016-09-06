@@ -35,7 +35,7 @@ public class LoadingDialog extends Dialog {
     @Override
     public void show() {
         super.show();
-        if(holder != null){
+        if (holder != null) {
             holder.pathTextView.init(context.getResources().getString(R.string.app_name));
         }
     }

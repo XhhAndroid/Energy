@@ -18,7 +18,6 @@ import com.ep.energy.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by Administrator on 2015/10/24.
@@ -84,7 +83,7 @@ public class FrgPositiveMap extends BaseFragment implements AMapLocationListener
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+//        ButterKnife.(this);
         if (mapView != null) {
             mapView.onDestroy();
         }

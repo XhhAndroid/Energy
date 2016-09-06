@@ -41,7 +41,7 @@ public class MainActivity extends BaseActivity implements PageChange {
 
     private List<ViewBean> viewlist = new ArrayList<>();
 
-    private int viewl[] = {R.layout.positiveenergy, R.layout.positivemap,R.layout.usercenter};
+    private int viewl[] = {R.layout.positiveenergy, R.layout.positivemap, R.layout.usercenter};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +104,9 @@ public class MainActivity extends BaseActivity implements PageChange {
         }
     }
 
-    /**控制标题栏图标*/
+    /**
+     * 控制标题栏图标
+     */
     private void show(int i) {
         switch (i) {
             case 1:

@@ -2,7 +2,6 @@ package com.ep.energy.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +22,6 @@ import com.zxh.q.zlibrary.utils.LogZ;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Handler;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -79,7 +77,7 @@ public class FrgPositiveenergy extends BaseFragment
         params.add(new ValueParam("pno", String.valueOf(curPage)));
         params.add(new ValueParam("ps", String.valueOf(PageSize)));
         params.add(new ValueParam("key", "0e86536e1934ebc5bbc1c299b0bc2093"));
-        OkHttpManager.okHttpCall_POST(getActivity(),url, params, new OkHttpManager.HttpListner() {
+        OkHttpManager.okHttpCall_POST(getActivity(), url, params, new OkHttpManager.HttpListner() {
             @Override
             public void onStart() {
             }
@@ -112,10 +110,11 @@ public class FrgPositiveenergy extends BaseFragment
             }
         });
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+//        ButterKnife.unbind(this);
     }
 
     @Override
