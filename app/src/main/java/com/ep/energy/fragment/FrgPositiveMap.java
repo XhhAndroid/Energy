@@ -60,6 +60,12 @@ public class FrgPositiveMap extends BaseFragment implements AMapLocationListener
         return layout;
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
+    }
+
     private void initview(View view) {
         AMap aMap = mapView.getMap();
     }

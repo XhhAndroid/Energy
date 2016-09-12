@@ -27,13 +27,13 @@ android {
         debug {
             storeFile file("energy.jks")
             storePassword "energy"
-            keyAlias "energy"
+            keyAlias "energy.jks"
             keyPassword "energy"
         }
         release {
             storeFile file("energy.jks")
             storePassword "energy"
-            keyAlias "energy"
+            keyAlias "energy.jks"
             keyPassword "energy"
         }
     }

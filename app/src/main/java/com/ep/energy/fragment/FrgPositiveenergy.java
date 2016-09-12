@@ -85,7 +85,7 @@ public class FrgPositiveenergy extends BaseFragment
             @Override
             public void onSuccess(final String response) {
                 dissmissLoading();
-                if (fresh) {
+                if (fresh && refreshLayout != null) {
                     refreshLayout.finishRefreshing();
                 }
                 Gson gson = new Gson();
