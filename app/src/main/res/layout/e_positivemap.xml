@@ -3,7 +3,6 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,8 +16,8 @@
             android:id="@+id/localText"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:maxLines="2"
             android:gravity="center_vertical"
-            android:background="@color/white"
-            android:text="当前位置"/>
+            android:background="@drawable/them_tvbutton_bg"/>
     </FrameLayout>
 </LinearLayout>

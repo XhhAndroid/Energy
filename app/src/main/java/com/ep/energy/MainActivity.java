@@ -20,6 +20,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity implements PageChange {
     @Bind(R.id.left)
@@ -54,18 +55,6 @@ public class MainActivity extends BaseActivity implements PageChange {
         if (actionBar != null) actionBar.setDisplayShowTitleEnabled(false);
 
         setupJazziness(PageSwitchViewpager.TransitionEffect.Tablet);
-
-        myToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.left_rel:
-                        ToastZ.Toastz(MainActivity.this, "向左");
-                        break;
-                }
-                return true;
-            }
-        });
     }
 
     private void setupJazziness(PageSwitchViewpager.TransitionEffect effect) {
@@ -91,17 +80,15 @@ public class MainActivity extends BaseActivity implements PageChange {
         switch (position % size) {
             case 0:
                 middle.setText("Ep");
-                show(1);
                 break;
             case 1:
                 middle.setText("Ep分布");
-                show(1);
                 break;
             case 2:
                 middle.setText("Ep个人中心");
-                show(2);
                 break;
         }
+        show(position % size);
     }
 
     /**
@@ -109,15 +96,15 @@ public class MainActivity extends BaseActivity implements PageChange {
      */
     private void show(int i) {
         switch (i) {
-            case 1:
+            case 0:
                 leftRel.setVisibility(View.INVISIBLE);
                 rightRel.setVisibility(View.VISIBLE);
                 break;
-            case 2:
+            case 1:
                 leftRel.setVisibility(View.VISIBLE);
                 rightRel.setVisibility(View.VISIBLE);
                 break;
-            case 3:
+            case 2:
                 leftRel.setVisibility(View.VISIBLE);
                 rightRel.setVisibility(View.INVISIBLE);
                 break;

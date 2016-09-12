@@ -22,6 +22,7 @@ import com.ep.energy.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Administrator on 2015/10/24.
@@ -50,7 +51,10 @@ public class FrgPositiveMap extends BaseFragment implements AMapLocationListener
         //设置定位模式为高精度模式，Battery_Saving为低功耗模式，Device_Sensors是仅设备模式
         mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
         //设置定位间隔,单位毫秒,默认为2000ms
-        mLocationOption.setInterval(2000);
+//        mLocationOption.setInterval(2000);
+        //单次定位
+        mLocationOption.setOnceLocationLatest(true);
+        mLocationOption.setOnceLocation(true);
         //设置定位参数
         mlocationClient.setLocationOption(mLocationOption);
         // 此方法为每隔固定时间会发起一次定位请求，为了减少电量消耗或网络流量消耗，
@@ -58,6 +62,7 @@ public class FrgPositiveMap extends BaseFragment implements AMapLocationListener
         // 在定位结束后，在合适的生命周期调用onDestroy()方法
         // 在单次定位情况下，定位无论成功与否，都无需调用stopLocation()方法移除请求，定位sdk内部会移除
         //启动定位
+
         mlocationClient.startLocation();
 
         initview(layout);
@@ -101,19 +106,22 @@ public class FrgPositiveMap extends BaseFragment implements AMapLocationListener
         if (mlocationClient != null) {
             mlocationClient.stopLocation();
         }
+        ButterKnife.unbind(this);
     }
 
     @Override
     public void onLocationChanged(AMapLocation amapLocation) {
         if (amapLocation != null) {
             if (amapLocation.getErrorCode() == 0) {
+                dissmissLoading();
                 //定位成功回调信息，设置相关消息
-                aMap.moveCamera(CameraUpdateFactory.changeLatLng(new LatLng(amapLocation.getLatitude(),amapLocation.getLongitude())));
+                aMap.moveCamera(CameraUpdateFactory.changeLatLng(new LatLng(amapLocation.getLatitude(), amapLocation.getLongitude())));
                 aMap.moveCamera(CameraUpdateFactory.zoomTo(18));
                 aMap.addMarker(getMarkerOptions(amapLocation));
 
-                localText.setText(amapLocation.getCity());
+                localText.setText(amapLocation.getAddress());
             } else {
+                localText.setText("获取位置数据失败，点击重试!");
                 //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
                 Log.e("AmapError", "location Error, ErrCode:"
                         + amapLocation.getErrorCode() + ", errInfo:"
@@ -121,6 +129,7 @@ public class FrgPositiveMap extends BaseFragment implements AMapLocationListener
             }
         }
     }
+
     //自定义一个图钉，并且设置图标，当我们点击图钉时，显示设置的信息
     private MarkerOptions getMarkerOptions(AMapLocation amapLocation) {
         //设置图钉选项
@@ -130,7 +139,7 @@ public class FrgPositiveMap extends BaseFragment implements AMapLocationListener
         //位置
         options.position(new LatLng(amapLocation.getLatitude(), amapLocation.getLongitude()));
         StringBuffer buffer = new StringBuffer();
-        buffer.append(amapLocation.getCountry() + "" + amapLocation.getProvince() + "" + amapLocation.getCity() +  "" + amapLocation.getDistrict() + "" + amapLocation.getStreet() + "" + amapLocation.getStreetNum());
+        buffer.append(amapLocation.getCountry() + "" + amapLocation.getProvince() + "" + amapLocation.getCity() + "" + amapLocation.getDistrict() + "" + amapLocation.getStreet() + "" + amapLocation.getStreetNum());
         //标题
         options.title(buffer.toString());
         //子标题
@@ -139,5 +148,11 @@ public class FrgPositiveMap extends BaseFragment implements AMapLocationListener
         options.period(60);
         return options;
 
+    }
+
+    @OnClick(R.id.localText)
+    public void onClick() {
+        showLoading();
+        mlocationClient.startLocation();
     }
 }
