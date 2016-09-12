@@ -12,7 +12,11 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps2d.AMap;
+import com.amap.api.maps2d.CameraUpdateFactory;
 import com.amap.api.maps2d.MapView;
+import com.amap.api.maps2d.model.BitmapDescriptorFactory;
+import com.amap.api.maps2d.model.LatLng;
+import com.amap.api.maps2d.model.MarkerOptions;
 import com.ep.energy.BaseFragment;
 import com.ep.energy.R;
 
@@ -31,6 +35,7 @@ public class FrgPositiveMap extends BaseFragment implements AMapLocationListener
     //声明mLocationOption对象
     public AMapLocationClientOption mLocationOption = null;
     private AMapLocationClient mlocationClient = null;
+    private AMap aMap = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -67,7 +72,7 @@ public class FrgPositiveMap extends BaseFragment implements AMapLocationListener
     }
 
     private void initview(View view) {
-        AMap aMap = mapView.getMap();
+        aMap = mapView.getMap();
     }
 
     @Override
@@ -103,13 +108,9 @@ public class FrgPositiveMap extends BaseFragment implements AMapLocationListener
         if (amapLocation != null) {
             if (amapLocation.getErrorCode() == 0) {
                 //定位成功回调信息，设置相关消息
-//                amapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表
-//                amapLocation.getLatitude();//获取纬度
-//                amapLocation.getLongitude();//获取经度
-//                amapLocation.getAccuracy();//获取精度信息
-//                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//                Date date = new Date(amapLocation.getTime());
-//                df.format(date);//定位时间
+                aMap.moveCamera(CameraUpdateFactory.changeLatLng(new LatLng(amapLocation.getLatitude(),amapLocation.getLongitude())));
+                aMap.moveCamera(CameraUpdateFactory.zoomTo(18));
+                aMap.addMarker(getMarkerOptions(amapLocation));
 
                 localText.setText(amapLocation.getCity());
             } else {
@@ -119,5 +120,24 @@ public class FrgPositiveMap extends BaseFragment implements AMapLocationListener
                         + amapLocation.getErrorInfo());
             }
         }
+    }
+    //自定义一个图钉，并且设置图标，当我们点击图钉时，显示设置的信息
+    private MarkerOptions getMarkerOptions(AMapLocation amapLocation) {
+        //设置图钉选项
+        MarkerOptions options = new MarkerOptions();
+        //图标
+        options.icon(BitmapDescriptorFactory.fromResource(R.mipmap.localtion));
+        //位置
+        options.position(new LatLng(amapLocation.getLatitude(), amapLocation.getLongitude()));
+        StringBuffer buffer = new StringBuffer();
+        buffer.append(amapLocation.getCountry() + "" + amapLocation.getProvince() + "" + amapLocation.getCity() +  "" + amapLocation.getDistrict() + "" + amapLocation.getStreet() + "" + amapLocation.getStreetNum());
+        //标题
+        options.title(buffer.toString());
+        //子标题
+        options.snippet("这里好火");
+        //设置多少帧刷新一次图片资源
+        options.period(60);
+        return options;
+
     }
 }
