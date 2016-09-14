@@ -12,14 +12,11 @@ import com.ep.energy.R;
 import com.ep.energy.activity.NewsWebActivity;
 import com.ep.energy.adapter.EnergyAdapter;
 import com.ep.energy.bean.PositivityModel;
-import com.ep.energy.http.OkHttpManager;
-import com.ep.energy.http.ValueParam;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.ep.energy.fragment.presenter.PositiveenergyPresenter;
+import com.ep.energy.fragment.uiInterface.PositiveenergyInterface;
 import com.zxh.q.zlibrary.circlerefresh.CircleRefreshLayout;
 import com.zxh.q.zlibrary.utils.LogZ;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,16 +40,19 @@ public class FrgPositiveenergy extends BaseFragment
     private EnergyAdapter energyAdapter;
     private List<PositivityModel.ResultBean.ListBean> positivityList = new ArrayList<>();
 
+    private PositiveenergyInterface positiveenergyInterface = null;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.e_positiveenergy, container, false);
         ButterKnife.bind(this, layout);
 
         initView();
+        initAdapter();
 
         showLoading();
-        getEnergyData(true);
-        initAdapter();
+        positiveenergyInterface = new PositiveenergyPresenter(energyAdapter,FrgPositiveenergy.this,refreshLayout,positivityList);
+        positiveenergyInterface.setAdapterData(true,curPage,PageSize);
 
         return layout;
     }
@@ -68,53 +68,10 @@ public class FrgPositiveenergy extends BaseFragment
 
     }
 
-    /**
-     * 获取数据
-     */
-    private void getEnergyData(final boolean fresh) {
-        String url = "http://v.juhe.cn/weixin/query";
-        List<ValueParam> params = new ArrayList<>();
-        params.add(new ValueParam("pno", String.valueOf(curPage)));
-        params.add(new ValueParam("ps", String.valueOf(PageSize)));
-        params.add(new ValueParam("key", "0e86536e1934ebc5bbc1c299b0bc2093"));
-        OkHttpManager.okHttpCall_POST(getActivity(), url, params, new OkHttpManager.HttpListner() {
-            @Override
-            public void onStart() {
-            }
-
-            @Override
-            public void onSuccess(final String response) {
-                dissmissLoading();
-                if (fresh && refreshLayout != null) {
-                    refreshLayout.finishRefreshing();
-                }
-                Gson gson = new Gson();
-                Type type = new TypeToken<PositivityModel>() {
-                }.getType();
-                PositivityModel positivityModel = gson.fromJson(response, type);
-                if (positivityModel != null) {
-                    if (fresh) {
-                        positivityList.clear();
-                        energyAdapter.notifyDataSetChanged();
-                    }
-                    if (positivityModel.getError_code() == 0) {
-                        positivityList.addAll(positivityModel.getResult().getList());
-                        energyAdapter.notifyDataSetChanged();
-                    }
-                }
-            }
-
-            @Override
-            public void onFail(String message) {
-                dissmissLoading();
-            }
-        });
-    }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-//        ButterKnife.unbind(this);
+        ButterKnife.unbind(this);
     }
 
     @Override
@@ -136,14 +93,13 @@ public class FrgPositiveenergy extends BaseFragment
     @Override
     public void refreshing() {
         curPage = 1;
-        getEnergyData(true);
-        LogZ.e("refreshing");
+        positiveenergyInterface.setAdapterData(true,curPage,PageSize);
     }
 
     @Override
     public void LoadMore() {
         super.LoadMore();
         curPage++;
-        getEnergyData(false);
+        positiveenergyInterface.setAdapterData(true,curPage,PageSize);
     }
 }
