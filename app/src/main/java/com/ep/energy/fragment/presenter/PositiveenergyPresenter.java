@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 首页处理数据类
  * Created by zhangxiaohui on 2016/9/14.
  */
 public class PositiveenergyPresenter implements PositiveenergyInterface {
