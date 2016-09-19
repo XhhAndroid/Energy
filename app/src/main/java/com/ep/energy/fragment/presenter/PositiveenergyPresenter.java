@@ -1,5 +1,7 @@
 package com.ep.energy.fragment.presenter;
 
+import android.support.v4.widget.SwipeRefreshLayout;
+
 import com.ep.energy.BaseFragment;
 import com.ep.energy.adapter.EnergyAdapter;
 import com.ep.energy.bean.PositivityModel;
@@ -20,11 +22,11 @@ import java.util.List;
  */
 public class PositiveenergyPresenter implements PositiveenergyInterface {
     private BaseFragment context;
-    private CircleRefreshLayout refreshLayout;
+    private SwipeRefreshLayout refreshLayout;
     private EnergyAdapter energyAdapter;
     private List<PositivityModel.ResultBean.ListBean> positivityList = null;
 
-    public PositiveenergyPresenter(EnergyAdapter energyAdapter, BaseFragment context, CircleRefreshLayout refreshLayout, List<PositivityModel.ResultBean.ListBean> positivityList) {
+    public PositiveenergyPresenter(EnergyAdapter energyAdapter, BaseFragment context, SwipeRefreshLayout refreshLayout, List<PositivityModel.ResultBean.ListBean> positivityList) {
         this.context = context;
         this.refreshLayout = refreshLayout;
         this.energyAdapter = energyAdapter;
@@ -52,7 +54,7 @@ public class PositiveenergyPresenter implements PositiveenergyInterface {
             public void onSuccess(final String response) {
                 context.dissmissLoading();
                 if (fresh && refreshLayout != null) {
-                    refreshLayout.finishRefreshing();
+                    refreshLayout.setRefreshing(false);
                 }
                 Gson gson = new Gson();
                 Type type = new TypeToken<PositivityModel>() {

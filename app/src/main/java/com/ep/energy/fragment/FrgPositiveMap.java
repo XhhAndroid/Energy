@@ -117,6 +117,8 @@ public class FrgPositiveMap extends BaseFragment implements AMapLocationListener
                 //定位成功回调信息，设置相关消息
                 aMap.moveCamera(CameraUpdateFactory.changeLatLng(new LatLng(amapLocation.getLatitude(), amapLocation.getLongitude())));
                 aMap.moveCamera(CameraUpdateFactory.zoomTo(18));
+
+                aMap.clear();
                 aMap.addMarker(getMarkerOptions(amapLocation));
 
                 localText.setText(amapLocation.getAddress());

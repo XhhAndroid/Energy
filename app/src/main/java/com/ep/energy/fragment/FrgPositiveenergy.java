@@ -2,6 +2,7 @@ package com.ep.energy.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +15,6 @@ import com.ep.energy.adapter.EnergyAdapter;
 import com.ep.energy.bean.PositivityModel;
 import com.ep.energy.fragment.presenter.PositiveenergyPresenter;
 import com.ep.energy.fragment.uiInterface.PositiveenergyInterface;
-import com.zxh.q.zlibrary.circlerefresh.CircleRefreshLayout;
-import com.zxh.q.zlibrary.utils.LogZ;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,12 +26,11 @@ import butterknife.ButterKnife;
  * 首页
  * Created by Administrator on 2015/10/24.
  */
-public class FrgPositiveenergy extends BaseFragment
-        implements CircleRefreshLayout.OnCircleRefreshListener {
+public class FrgPositiveenergy extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
     @Bind(R.id.listview)
     ListView listview;
-    @Bind(R.id.refresh_layout)
-    CircleRefreshLayout refreshLayout;
+    @Bind(R.id.swiperefrelayout)
+    SwipeRefreshLayout refreshLayout;
 
     private int curPage = 1;
     private int PageSize = 15;
@@ -51,14 +49,16 @@ public class FrgPositiveenergy extends BaseFragment
         initAdapter();
 
         showLoading();
-        positiveenergyInterface = new PositiveenergyPresenter(energyAdapter,FrgPositiveenergy.this,refreshLayout,positivityList);
-        positiveenergyInterface.setAdapterData(true,curPage,PageSize);
+        positiveenergyInterface = new PositiveenergyPresenter(energyAdapter, FrgPositiveenergy.this, refreshLayout, positivityList);
+        positiveenergyInterface.setAdapterData(true, curPage, PageSize);
 
         return layout;
     }
 
     private void initView() {
         refreshLayout.setOnRefreshListener(this);
+        refreshLayout.setColorScheme(android.R.color.holo_green_dark, android.R.color.holo_green_light,
+                android.R.color.holo_orange_light, android.R.color.holo_red_light);
     }
 
     private void initAdapter() {
@@ -86,20 +86,15 @@ public class FrgPositiveenergy extends BaseFragment
     }
 
     @Override
-    public void completeRefresh() {
-        LogZ.e("completeRefresh");
-    }
-
-    @Override
-    public void refreshing() {
-        curPage = 1;
-        positiveenergyInterface.setAdapterData(true,curPage,PageSize);
-    }
-
-    @Override
     public void LoadMore() {
         super.LoadMore();
         curPage++;
-        positiveenergyInterface.setAdapterData(true,curPage,PageSize);
+        positiveenergyInterface.setAdapterData(true, curPage, PageSize);
+    }
+
+    @Override
+    public void onRefresh() {
+        curPage = 1;
+        positiveenergyInterface.setAdapterData(true, curPage, PageSize);
     }
 }
