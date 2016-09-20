@@ -20,10 +20,6 @@ import butterknife.ButterKnife;
  * Created by Administrator on 2015/10/24.
  */
 public class FrgUserCenter extends BaseFragment {
-    @Bind(R.id.reputation)
-    TextView reputation;
-//    @Bind(R.id.ztextview)
-//    ZTextView ztextview;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,29 +32,7 @@ public class FrgUserCenter extends BaseFragment {
     }
 
     private void initview() {
-        List<String> textlist = new ArrayList<>();
-        textlist.add("名字");
-        textlist.add("性别");
-        textlist.add("数字");
 
-        List<Integer> textcolorlist = new ArrayList<>();
-        textcolorlist.add(R.color.theme_color);
-        textcolorlist.add(R.color.holo_blue);
-        textcolorlist.add(R.color.theme_color);
-
-        List<Integer> textsizelist = new ArrayList<>();
-        textsizelist.add(14);
-        textsizelist.add(17);
-        textsizelist.add(12);
-
-//        ztextview.setdata(textsizelist, textlist,textcolorlist);
-
-        reputation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ToastZ.Toastz(getActivity(), "我的信誉");
-            }
-        });
     }
 
     @Override
@@ -70,6 +44,6 @@ public class FrgUserCenter extends BaseFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-//        ButterKnife.unbind(this);
+        ButterKnife.unbind(this);
     }
 }
