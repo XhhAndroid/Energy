@@ -10,8 +10,9 @@ import android.widget.TextView;
 
 import com.ep.energy.BaseFragment;
 import com.ep.energy.R;
-import com.ep.energy.fragment.presenter.UserCenterPresenter;
-import com.ep.energy.fragment.uiInterface.UserCenterInterface;
+import com.ep.energy.bean.UserCenterBean;
+import com.ep.energy.presenter.UserCenterPre;
+import com.ep.energy.viewInterface.UserCenterView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -19,7 +20,7 @@ import butterknife.ButterKnife;
 /**
  * Created by Administrator on 2015/10/24.
  */
-public class FrgUserCenter extends BaseFragment {
+public class FrgUserCenter extends BaseFragment implements UserCenterView {
 
     @Bind(R.id.constellation)
     TextView constellation;
@@ -40,8 +41,6 @@ public class FrgUserCenter extends BaseFragment {
     @Bind(R.id.constellationImg)
     ImageView constellationImg;
 
-    private UserCenterInterface userCenterInterface;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.e_usercenter, container, false);
@@ -53,17 +52,8 @@ public class FrgUserCenter extends BaseFragment {
     }
 
     private void initview() {
-        userCenterInterface = new UserCenterPresenter(this);
-
-        userCenterInterface.businessNum(businessNum);
-        userCenterInterface.constellation(constellation);
-        userCenterInterface.constellationImg(constellationImg);
-        userCenterInterface.financeNum(financeNum);
-        userCenterInterface.healthNum(healthNum);
-        userCenterInterface.loveNum(loveNum);
-        userCenterInterface.luckColorLin(luckColorLin);
-        userCenterInterface.luckNum(luckNum);
-        userCenterInterface.tip(tip);
+        UserCenterPre userCenterPre = new UserCenterPre(this);
+        userCenterPre.getconstellationData();
     }
 
     @Override
@@ -75,5 +65,41 @@ public class FrgUserCenter extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public BaseFragment Activity() {
+        return this;
+    }
+
+    @Override
+    public String conName() {
+        return "金牛座";
+    }
+
+    @Override
+    public String type() {
+        return "today";
+    }
+
+    @Override
+    public void loadingShow() {
+        showLoading();
+    }
+
+    @Override
+    public void loadingdissmiss() {
+        dissmissLoading();
+    }
+
+    @Override
+    public void updateUi(UserCenterBean centerBean) {
+        constellation.setText(centerBean.getName());
+        healthNum.setText("健康指数:"+centerBean.getHealth());
+        loveNum.setText("爱情指数:"+centerBean.getLove());
+        businessNum.setText("事业指数:"+centerBean.getWork());
+        financeNum.setText("财运指数:"+centerBean.getMoney());
+        luckNum.setText("幸运数字:"+centerBean.getNumber());
+        tip.setText(centerBean.getSummary());
     }
 }

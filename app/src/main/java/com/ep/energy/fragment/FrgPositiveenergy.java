@@ -13,8 +13,8 @@ import com.ep.energy.R;
 import com.ep.energy.activity.NewsWebActivity;
 import com.ep.energy.adapter.EnergyAdapter;
 import com.ep.energy.bean.PositivityModel;
-import com.ep.energy.fragment.presenter.PositiveenergyPresenter;
-import com.ep.energy.fragment.uiInterface.PositiveenergyInterface;
+import com.ep.energy.presenter.PositiveenergyPresenter;
+import com.ep.energy.modelInterface.PositiveenergyInterface;
 
 import java.util.ArrayList;
 import java.util.List;

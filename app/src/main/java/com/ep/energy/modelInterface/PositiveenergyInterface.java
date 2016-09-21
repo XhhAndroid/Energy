@@ -1,4 +1,4 @@
-package com.ep.energy.fragment.uiInterface;
+package com.ep.energy.modelInterface;
 
 /**
  * Created by zhangxiaohui on 2016/9/14.

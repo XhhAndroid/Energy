@@ -1,16 +1,15 @@
-package com.ep.energy.fragment.presenter;
+package com.ep.energy.presenter;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 
 import com.ep.energy.BaseFragment;
 import com.ep.energy.adapter.EnergyAdapter;
 import com.ep.energy.bean.PositivityModel;
-import com.ep.energy.fragment.uiInterface.PositiveenergyInterface;
+import com.ep.energy.modelInterface.PositiveenergyInterface;
 import com.ep.energy.http.OkHttpManager;
 import com.ep.energy.http.ValueParam;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.zxh.q.zlibrary.circlerefresh.CircleRefreshLayout;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;

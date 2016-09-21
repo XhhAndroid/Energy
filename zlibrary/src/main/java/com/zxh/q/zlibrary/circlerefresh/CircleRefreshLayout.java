@@ -258,6 +258,7 @@ public class CircleRefreshLayout extends FrameLayout {
             onCircleRefreshListener.completeRefresh();
         }
         mIsRefreshing = false;
+        if(mHeader != null)
         mHeader.setRefreshing(false);
     }
 
