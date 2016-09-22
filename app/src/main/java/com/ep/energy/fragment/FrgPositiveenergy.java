@@ -13,8 +13,8 @@ import com.ep.energy.R;
 import com.ep.energy.activity.NewsWebActivity;
 import com.ep.energy.adapter.EnergyAdapter;
 import com.ep.energy.bean.PositivityModel;
-import com.ep.energy.presenter.PositiveenergyPresenter;
-import com.ep.energy.modelInterface.PositiveenergyInterface;
+import com.ep.energy.presenter.PositiveEnergyPre;
+import com.ep.energy.viewInterface.PositiveEnergyView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ import butterknife.ButterKnife;
  * 首页
  * Created by Administrator on 2015/10/24.
  */
-public class FrgPositiveenergy extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
+public class FrgPositiveenergy extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, PositiveEnergyView {
     @Bind(R.id.listview)
     ListView listview;
     @Bind(R.id.swiperefrelayout)
@@ -34,11 +34,13 @@ public class FrgPositiveenergy extends BaseFragment implements SwipeRefreshLayou
 
     private int curPage = 1;
     private int PageSize = 15;
+    private boolean refresh = true;
 
     private EnergyAdapter energyAdapter;
     private List<PositivityModel.ResultBean.ListBean> positivityList = new ArrayList<>();
 
-    private PositiveenergyInterface positiveenergyInterface = null;
+    //    private PositiveenergyInterface positiveenergyInterface = null;
+    private PositiveEnergyPre positiveEnergyPre;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,8 +51,10 @@ public class FrgPositiveenergy extends BaseFragment implements SwipeRefreshLayou
         initAdapter();
 
         showLoading();
-        positiveenergyInterface = new PositiveenergyPresenter(energyAdapter, FrgPositiveenergy.this, refreshLayout, positivityList);
-        positiveenergyInterface.setAdapterData(true, curPage, PageSize);
+//        positiveenergyInterface = new PositiveenergyPresenter(energyAdapter, FrgPositiveenergy.this, refreshLayout, positivityList);
+//        positiveenergyInterface.setAdapterData(refresh, curPage, PageSize);
+        positiveEnergyPre = new PositiveEnergyPre(this);
+        positiveEnergyPre.getPositiveEnergyData(true);
 
         return layout;
     }
@@ -89,12 +93,64 @@ public class FrgPositiveenergy extends BaseFragment implements SwipeRefreshLayou
     public void LoadMore() {
         super.LoadMore();
         curPage++;
-        positiveenergyInterface.setAdapterData(true, curPage, PageSize);
+//        positiveenergyInterface.setAdapterData(true, curPage, PageSize);
+        positiveEnergyPre.getPositiveEnergyData(false);
     }
 
     @Override
     public void onRefresh() {
         curPage = 1;
-        positiveenergyInterface.setAdapterData(true, curPage, PageSize);
+        refresh = true;
+//        positiveenergyInterface.setAdapterData(refresh, curPage, PageSize);
+        positiveEnergyPre.getPositiveEnergyData(true);
+    }
+
+    @Override
+    public BaseFragment Activity() {
+        return this;
+    }
+
+    @Override
+    public int curPage() {
+        return curPage;
+    }
+
+    @Override
+    public int pageSize() {
+        return PageSize;
+    }
+
+    @Override
+    public boolean refresh() {
+        return refresh;
+    }
+
+    @Override
+    public void dialogShow() {
+        showLoading();
+    }
+
+    @Override
+    public void dialogMiss() {
+        dissmissLoading();
+    }
+
+    @Override
+    public void refreshFinish() {
+        refreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void suceessData(PositivityModel positivityModel) {
+        if (positivityModel.getError_code() == 0) {
+            if (refresh) {
+                positivityList.clear();
+                if (energyAdapter != null)
+                    energyAdapter.notifyDataSetChanged();
+            }
+            positivityList.addAll(positivityModel.getResult().getList());
+            if (energyAdapter != null)
+                energyAdapter.notifyDataSetChanged();
+        }
     }
 }
