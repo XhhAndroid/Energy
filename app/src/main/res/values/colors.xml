@@ -11,4 +11,5 @@
     <color name="line">#e1e1e1</color>
 
     <color name="transparent">#00000000</color>
+    <color name="transparent_background">#30000000</color>
 </resources>

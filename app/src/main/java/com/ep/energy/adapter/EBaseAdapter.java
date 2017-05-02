@@ -22,7 +22,7 @@ public class EBaseAdapter<T> extends BaseAdapter{
         inflater = LayoutInflater.from(mContext);
     }
 
-    public EBaseAdapter(OnclickListner onclickListner, Context mContext) {
+    public EBaseAdapter(OnclickListner<T> onclickListner, Context mContext) {
         this.onclickListner = onclickListner;
         this.mContext = mContext;
         inflater = LayoutInflater.from(mContext);

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import com.ep.energy.dialog.LoadingDialog;
 
@@ -14,6 +15,7 @@ public class BaseActivity extends AppCompatActivity {
     long firstClickTime = 0;
     private boolean doubleClick = false;
     public LoadingDialog loadingDialog;
+    private Toast toast;
 
     private int topbarlayout = com.zxh.q.zlibrary.R.layout.baseactivity;
 
@@ -23,24 +25,40 @@ public class BaseActivity extends AppCompatActivity {
         loadingDialog = new LoadingDialog(this);
     }
 
-    public void showLoading(){
-        if(loadingDialog == null){
+    public void showToast(String showText) {
+        if(toast == null){
+            toast = new Toast(this);
+            toast.setText(showText);
+            toast.setDuration(Toast.LENGTH_SHORT);
+            toast.show();
+        }else {
+            toast.cancel();
+            toast.setText(showText);
+            toast.setDuration(Toast.LENGTH_SHORT);
+            toast.show();
+        }
+    }
+
+    public void showLoading() {
+        if (loadingDialog == null) {
             loadingDialog = new LoadingDialog(this);
         }
-        if(loadingDialog.isShowing()){
+        if (loadingDialog.isShowing()) {
             return;
         }
         loadingDialog.show();
     }
-    public void dissmissLoading(){
-        if(loadingDialog == null){
+
+    public void dissmissLoading() {
+        if (loadingDialog == null) {
             loadingDialog = new LoadingDialog(this);
         }
-        if(!loadingDialog.isShowing()){
+        if (!loadingDialog.isShowing()) {
             return;
         }
         loadingDialog.dismiss();
     }
+
     /**
      * 开启双击关闭
      */
