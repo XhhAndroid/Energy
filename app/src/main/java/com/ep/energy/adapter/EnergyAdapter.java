@@ -3,6 +3,7 @@ package com.ep.energy.adapter;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -42,6 +43,7 @@ public class EnergyAdapter extends EBaseAdapter<PositivityModel.ResultBean.ListB
                     .load(positivityModel.getFirstImg())
                     .placeholder(R.drawable.energy_default_img)
                     .crossFade()
+                    .animate(AnimationUtils.loadAnimation(mContext,R.anim.load_img_animal))
                     .into(holder.positiveImg);
         }
         convertView.setOnClickListener(new View.OnClickListener() {
@@ -54,7 +56,7 @@ public class EnergyAdapter extends EBaseAdapter<PositivityModel.ResultBean.ListB
         return convertView;
     }
 
-    static class ViewHolder {
+    class ViewHolder {
         @Bind(R.id.positiveImg)
         ImageView positiveImg;
         @Bind(R.id.positiveTitle)

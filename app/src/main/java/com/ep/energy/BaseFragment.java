@@ -59,9 +59,4 @@ public class BaseFragment extends Fragment implements EBaseAdapter.OnclickListne
     public void Onclick2(View v, Object o, int position) {
 
     }
-
-    @Override
-    public void LoadMore() {
-
-    }
 }

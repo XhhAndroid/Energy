@@ -51,9 +51,6 @@ public class EBaseAdapter<T> extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if(position == getCount() - 2){
-            onclickListner.LoadMore();
-        }
         return convertView;
     }
 
@@ -61,6 +58,5 @@ public class EBaseAdapter<T> extends BaseAdapter{
         void onClick0(View v,T t,int position);
         void OnClick1(View v, T t, int position);
         void Onclick2(View v,T t,int position);
-        void LoadMore();
     }
 }

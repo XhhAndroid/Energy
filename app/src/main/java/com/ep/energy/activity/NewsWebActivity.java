@@ -46,13 +46,13 @@ public class NewsWebActivity extends BaseActivity {
         mWebSettings.setLoadWithOverviewMode(true);
         mWebSettings.setUseWideViewPort(true);
         mWebSettings.setDefaultTextEncodingName("utf-8");
-        mWebSettings.setLoadsImagesAutomatically(true);
+//        mWebSettings.setLoadsImagesAutomatically(true);
 
         //调用JS方法.安卓版本大于17,加上注解 @JavascriptInterface
         mWebSettings.setJavaScriptEnabled(true);
 
-        saveData(mWebSettings);
-        newWin(mWebSettings);
+//        saveData(mWebSettings);
+//        newWin(mWebSettings);
 
         mWebView.setWebChromeClient(webChromeClient);
         mWebView.setWebViewClient(webViewClient);
@@ -101,6 +101,17 @@ public class NewsWebActivity extends BaseActivity {
             return true;
         }
 
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            super.onPageStarted(view, url, favicon);
+            showLoading();
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            super.onPageFinished(view, url);
+            dissmissLoading();
+        }
     };
 
     WebChromeClient webChromeClient = new WebChromeClient() {
@@ -110,6 +121,7 @@ public class NewsWebActivity extends BaseActivity {
         //<uses-permission android:name="android.permission.INTERNET"/>
         //<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
         //<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
         @Override
         public void onReceivedIcon(WebView view, Bitmap icon) {
             super.onReceivedIcon(view, icon);

@@ -34,10 +34,8 @@ public class getEnergyImple implements getEnergyListner {
 
             @Override
             public void onSuccess(final String response) {
-//                context.dissmissLoading();
                 positiveEnergyView.dialogMiss();
                 if (fresh) {
-//                    refreshLayout.setRefreshing(false);
                     positiveEnergyView.refreshFinish();
                 }
                 Gson gson = new Gson();
@@ -45,16 +43,8 @@ public class getEnergyImple implements getEnergyListner {
                 }.getType();
                 PositivityModel positivityModel = gson.fromJson(response, type);
                 if (positivityModel != null) {
-//                    if (fresh) {
-//                        positivityList.clear();
-//                        if (energyAdapter != null)
-//                            energyAdapter.notifyDataSetChanged();
-//                    }
                     if (positivityModel.getError_code() == 0) {
                         positiveEnergyView.suceessData(positivityModel);
-//                        positivityList.addAll(positivityModel.getResult().getList());
-//                        if (energyAdapter != null)
-//                            energyAdapter.notifyDataSetChanged();
                     }
                 }
             }

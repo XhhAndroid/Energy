@@ -6,6 +6,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ListView;
 
 import com.ep.energy.BaseFragment;
@@ -39,7 +40,6 @@ public class FrgPositiveenergy extends BaseFragment implements SwipeRefreshLayou
     private EnergyAdapter energyAdapter;
     private List<PositivityModel.ResultBean.ListBean> positivityList = new ArrayList<>();
 
-    //    private PositiveenergyInterface positiveenergyInterface = null;
     private PositiveEnergyPre positiveEnergyPre;
 
     @Override
@@ -51,10 +51,22 @@ public class FrgPositiveenergy extends BaseFragment implements SwipeRefreshLayou
         initAdapter();
 
         showLoading();
-//        positiveenergyInterface = new PositiveenergyPresenter(energyAdapter, FrgPositiveenergy.this, refreshLayout, positivityList);
-//        positiveenergyInterface.setAdapterData(refresh, curPage, PageSize);
         positiveEnergyPre = new PositiveEnergyPre(this);
         positiveEnergyPre.getPositiveEnergyData(true);
+
+        listview.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                if (scrollState == SCROLL_STATE_IDLE && (view.getLastVisiblePosition() + 1) == view.getCount()) {
+                    LoadMore();
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+            }
+        });
 
         return layout;
     }
@@ -89,11 +101,9 @@ public class FrgPositiveenergy extends BaseFragment implements SwipeRefreshLayou
         }
     }
 
-    @Override
     public void LoadMore() {
-        super.LoadMore();
+        refresh = false;
         curPage++;
-//        positiveenergyInterface.setAdapterData(true, curPage, PageSize);
         positiveEnergyPre.getPositiveEnergyData(false);
     }
 
@@ -101,7 +111,6 @@ public class FrgPositiveenergy extends BaseFragment implements SwipeRefreshLayou
     public void onRefresh() {
         curPage = 1;
         refresh = true;
-//        positiveenergyInterface.setAdapterData(refresh, curPage, PageSize);
         positiveEnergyPre.getPositiveEnergyData(true);
     }
 
