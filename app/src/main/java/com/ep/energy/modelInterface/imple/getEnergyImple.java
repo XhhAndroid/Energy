@@ -29,7 +29,9 @@ public class getEnergyImple implements getEnergyListner {
         OkHttpManager.okHttpCall_POST(baseFragment.getActivity(), url, params, new OkHttpManager.HttpListner() {
             @Override
             public void onStart() {
-                positiveEnergyView.dialogShow();
+                if(fresh){
+                    positiveEnergyView.dialogShow();
+                }
             }
 
             @Override

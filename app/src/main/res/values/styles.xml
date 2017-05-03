@@ -43,7 +43,7 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:layout_marginTop">5dp</item>
     </style>
-    <style name="UMDialog">
+    <style name="UMDialog"  parent="android:style/Theme.Black.NoTitleBar.Fullscreen">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@color/transparent_background</item>
         <item name="android:windowIsTranslucent">true</item>

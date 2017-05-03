@@ -52,12 +52,17 @@
             android:theme="@style/ImageTranslucentTheme"
             android:windowSoftInputMode="adjustPan" />
         <activity
+            android:name=".activity.OOMLogActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ImageTranslucentTheme"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
             android:name=".dialog.SelectConstellationActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/UMDialog"
             android:windowSoftInputMode="adjustPan" />
 
         <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
         <service android:name="com.amap.api.location.APSService" />
     </application>
-
 </manifest>

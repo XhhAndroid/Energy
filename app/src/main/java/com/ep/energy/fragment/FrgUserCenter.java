@@ -12,9 +12,9 @@ import android.widget.TextView;
 
 import com.ep.energy.BaseFragment;
 import com.ep.energy.Constact;
-import com.ep.energy.EApplication;
 import com.ep.energy.R;
 import com.ep.energy.SharePrefrenceUtil;
+import com.ep.energy.activity.OOMLogActivity;
 import com.ep.energy.bean.UserCenterBean;
 import com.ep.energy.dialog.SelectConstellationActivity;
 import com.ep.energy.presenter.UserCenterPre;
@@ -111,13 +111,16 @@ public class FrgUserCenter extends BaseFragment implements UserCenterView {
         tip.setText(centerBean.getSummary());
     }
 
-    @OnClick({R.id.constellationImg, R.id.constellation})
+    @OnClick({R.id.constellationImg, R.id.constellation, R.id.settingTv})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.constellationImg:
                 break;
             case R.id.constellation:
                 startActivityForResult(new Intent(getActivity(), SelectConstellationActivity.class), Constact.SELECT_CONSTELLATION_CODE);
+                break;
+            case R.id.settingTv:
+                startActivity(new Intent(getActivity(), OOMLogActivity.class));
                 break;
         }
     }

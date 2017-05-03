@@ -3,6 +3,8 @@ package com.ep.energy;
 import android.app.Application;
 import android.content.Context;
 
+import com.ep.energy.crash.CrashHandler;
+
 import okhttp3.OkHttpClient;
 
 /**
@@ -13,6 +15,7 @@ public class EApplication extends Application {
     public static OkHttpClient okHttpClient;
     private static EApplication eApplication;
     private Context context;
+    protected CrashHandler crashHandler;
 
     public EApplication() {}
 
@@ -28,6 +31,9 @@ public class EApplication extends Application {
         }
         eApplication = this;
         initRequest();
+
+        crashHandler = CrashHandler.getInstance();
+        crashHandler.init(true, false);
     }
 
     private void initRequest() {

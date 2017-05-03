@@ -1,5 +1,6 @@
 package com.ep.energy.dialog;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
@@ -7,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.ep.energy.BaseActivity;
 import com.ep.energy.R;
 import com.ep.energy.SharePrefrenceUtil;
 import com.ep.energy.adapter.EBaseAdapter;
@@ -18,12 +18,13 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by zhangxiaohui on 2017/5/2.
  */
 
-public class SelectConstellationActivity extends BaseActivity {
+public class SelectConstellationActivity extends Activity {
     @Bind(R.id.listView)
     ListView listView;
 
@@ -73,6 +74,11 @@ public class SelectConstellationActivity extends BaseActivity {
             constellatBeanList.add(constellatBean);
         }
         return constellatBeanList;
+    }
+
+    @OnClick(R.id.rootView)
+    public void onClick() {
+        finish();
     }
 
     public class ConsteAdapter extends EBaseAdapter<ConstellatBean> {

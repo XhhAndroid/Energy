@@ -71,4 +71,11 @@
             style="@style/centerTextView"
             android:text=""/>
     </LinearLayout>
+    <TextView
+        android:id="@+id/settingTv"
+        android:layout_width="match_parent"
+        android:text="设置"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:layout_height="40dp" />
 </LinearLayout>
