@@ -1,5 +1,6 @@
 package com.ep.energy.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,7 +11,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ep.energy.BaseFragment;
+import com.ep.energy.Constact;
+import com.ep.energy.EApplication;
 import com.ep.energy.R;
+import com.ep.energy.SharePrefrenceUtil;
 import com.ep.energy.bean.UserCenterBean;
 import com.ep.energy.dialog.SelectConstellationActivity;
 import com.ep.energy.presenter.UserCenterPre;
@@ -24,7 +28,6 @@ import butterknife.OnClick;
  * Created by Administrator on 2015/10/24.
  */
 public class FrgUserCenter extends BaseFragment implements UserCenterView {
-
     @Bind(R.id.constellation)
     TextView constellation;
     @Bind(R.id.healthNum)
@@ -44,6 +47,8 @@ public class FrgUserCenter extends BaseFragment implements UserCenterView {
     @Bind(R.id.constellationImg)
     ImageView constellationImg;
 
+    private UserCenterPre userCenterPre;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.e_usercenter, container, false);
@@ -55,7 +60,7 @@ public class FrgUserCenter extends BaseFragment implements UserCenterView {
     }
 
     private void initview() {
-        UserCenterPre userCenterPre = new UserCenterPre(this);
+        userCenterPre = new UserCenterPre(this);
         userCenterPre.getconstellationData();
     }
 
@@ -77,7 +82,7 @@ public class FrgUserCenter extends BaseFragment implements UserCenterView {
 
     @Override
     public String conName() {
-        return "金牛座";
+        return SharePrefrenceUtil.getConstellation();
     }
 
     @Override
@@ -112,8 +117,20 @@ public class FrgUserCenter extends BaseFragment implements UserCenterView {
             case R.id.constellationImg:
                 break;
             case R.id.constellation:
-                startActivity(new Intent(getActivity(), SelectConstellationActivity.class));
+                startActivityForResult(new Intent(getActivity(), SelectConstellationActivity.class), Constact.SELECT_CONSTELLATION_CODE);
                 break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
+                case Constact.SELECT_CONSTELLATION_CODE:
+                    userCenterPre.getconstellationData();
+                    break;
+            }
         }
     }
 }

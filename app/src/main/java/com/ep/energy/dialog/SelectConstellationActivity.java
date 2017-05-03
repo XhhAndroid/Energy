@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.ep.energy.BaseActivity;
 import com.ep.energy.R;
+import com.ep.energy.SharePrefrenceUtil;
 import com.ep.energy.adapter.EBaseAdapter;
 import com.ep.energy.bean.ConstellatBean;
 
@@ -38,7 +39,9 @@ public class SelectConstellationActivity extends BaseActivity {
         consteAdapter = new ConsteAdapter(new EBaseAdapter.OnclickListner<ConstellatBean>() {
             @Override
             public void onClick0(View v, ConstellatBean constellatBean, int position) {
-                showToast(constellatBean.getName());
+                SharePrefrenceUtil.setConstellation(constellatBean.getName());
+                setResult(RESULT_OK);
+                finish();
             }
 
             @Override
@@ -50,7 +53,7 @@ public class SelectConstellationActivity extends BaseActivity {
             public void Onclick2(View v, ConstellatBean constellatBean, int position) {
 
             }
-        },this);
+        }, this);
         constellatBeanList.addAll(getConstellationList());
         consteAdapter.setList(constellatBeanList);
         listView.setAdapter(consteAdapter);

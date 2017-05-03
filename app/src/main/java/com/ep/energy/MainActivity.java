@@ -50,7 +50,7 @@ public class MainActivity extends BaseActivity implements PageChange {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-//        setSupportActionBar(myToolbar);
+        setSupportActionBar(myToolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) actionBar.setDisplayShowTitleEnabled(false);
 
