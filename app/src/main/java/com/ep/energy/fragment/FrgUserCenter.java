@@ -2,12 +2,14 @@ package com.ep.energy.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.ep.energy.BaseFragment;
@@ -46,6 +48,14 @@ public class FrgUserCenter extends BaseFragment implements UserCenterView {
     LinearLayout luckColorLin;
     @Bind(R.id.constellationImg)
     ImageView constellationImg;
+    @Bind(R.id.healthBar)
+    ProgressBar healthBar;
+    @Bind(R.id.loveBar)
+    ProgressBar loveBar;
+    @Bind(R.id.businessBar)
+    ProgressBar businessBar;
+    @Bind(R.id.moneyBar)
+    ProgressBar moneyBar;
 
     private UserCenterPre userCenterPre;
 
@@ -107,11 +117,16 @@ public class FrgUserCenter extends BaseFragment implements UserCenterView {
         loveNum.setText("爱情指数:" + centerBean.getLove());
         businessNum.setText("事业指数:" + centerBean.getWork());
         financeNum.setText("财运指数:" + centerBean.getMoney());
+        setProgressData(healthBar, centerBean.getHealth());
+        setProgressData(loveBar, centerBean.getLove());
+        setProgressData(businessBar, centerBean.getWork());
+        setProgressData(moneyBar, centerBean.getMoney());
+
         luckNum.setText("幸运数字:" + centerBean.getNumber());
         tip.setText(centerBean.getSummary());
     }
 
-    @OnClick({R.id.constellationImg, R.id.constellation, R.id.settingTv})
+    @OnClick({R.id.constellationImg, R.id.constellation, R.id.settingTv, R.id.handleSettingTv})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.constellationImg:
@@ -122,7 +137,20 @@ public class FrgUserCenter extends BaseFragment implements UserCenterView {
             case R.id.settingTv:
                 startActivity(new Intent(getActivity(), OOMLogActivity.class));
                 break;
+            case R.id.handleSettingTv:// TODO: 2017/9/4 行为习惯设置
+
+                break;
         }
+    }
+
+    private void setProgressData(ProgressBar progressData, String number) {
+        int value = 0;
+        try {
+            value = Integer.parseInt(number.replace("%", ""));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        progressData.setProgress(value);
     }
 
     @Override

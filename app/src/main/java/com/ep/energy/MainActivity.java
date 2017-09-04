@@ -42,7 +42,7 @@ public class MainActivity extends BaseActivity implements PageChange {
 
     private List<ViewBean> viewlist = new ArrayList<>();
 
-    private int viewl[] = {R.layout.positiveenergy, R.layout.positivemap, R.layout.usercenter};
+    private int viewl[] = {R.layout.positiveenergy, R.layout.usercenter};//, R.layout.positivemap
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,10 +81,10 @@ public class MainActivity extends BaseActivity implements PageChange {
             case 0:
                 middle.setText("Ep");
                 break;
+//            case 1:
+//                middle.setText("Ep分布");
+//                break;
             case 1:
-                middle.setText("Ep分布");
-                break;
-            case 2:
                 middle.setText("Ep个人中心");
                 break;
         }
@@ -100,11 +100,11 @@ public class MainActivity extends BaseActivity implements PageChange {
                 leftRel.setVisibility(View.INVISIBLE);
                 rightRel.setVisibility(View.VISIBLE);
                 break;
+//            case 1:
+//                leftRel.setVisibility(View.VISIBLE);
+//                rightRel.setVisibility(View.VISIBLE);
+//                break;
             case 1:
-                leftRel.setVisibility(View.VISIBLE);
-                rightRel.setVisibility(View.VISIBLE);
-                break;
-            case 2:
                 leftRel.setVisibility(View.VISIBLE);
                 rightRel.setVisibility(View.INVISIBLE);
                 break;

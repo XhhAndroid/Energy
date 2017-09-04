@@ -1,5 +1,6 @@
 package com.ep.energy.activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Message;
@@ -16,6 +17,7 @@ import com.ep.energy.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 通用webView
@@ -173,5 +175,10 @@ public class NewsWebActivity extends BaseActivity {
             mWebView = null;
         }
         super.onDestroy();
+    }
+
+    @OnClick(R.id.shareMenu)
+    public void onViewClicked() {
+        startActivity(new Intent(NewsWebActivity.this, ShareActivity.class));
     }
 }

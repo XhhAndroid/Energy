@@ -4,4 +4,5 @@
     <color name="theme_btn_press">#F8EDE2</color>
     <color name="holo_blue">#FF33E5B5</color>
     <color name="theme_color">#EA8010</color>
+    <color name="_222222">#222222</color>
 </resources>

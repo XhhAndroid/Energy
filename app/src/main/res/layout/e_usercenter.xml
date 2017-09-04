@@ -3,79 +3,173 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <LinearLayout
         android:id="@+id/luckColorLin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:minHeight="160dp"
         android:orientation="vertical"
-        android:paddingRight="15dp"
-        android:paddingLeft="15dp"
-        android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:background="@color/color_base_dialog_red">
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="10dp">
+        <!--color_base_dialog_red-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal">
+
             <ImageView
                 android:id="@+id/constellationImg"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:contentDescription="@null"
-                android:background="@mipmap/update_head_icon"/>
+                android:background="@mipmap/update_head_icon"
+                android:contentDescription="@null" />
+
             <TextView
                 android:id="@+id/constellation"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:drawableRight="@mipmap/mine_select_constellation"
                 android:gravity="right|top"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                android:text=""/>
+                android:textColor="@color/theme_color"
+                android:textSize="15sp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingRight="20dp">
+
             <TextView
                 android:id="@+id/healthNum"
-                style="@style/centerTextView"
-                android:layout_weight="1"
-                android:layout_marginTop="5dp"
-                android:text=":"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/_222222" />
+
+            <ProgressBar
+                android:id="@+id/healthBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginLeft="10dp"
+                android:max="100"
+                android:progress="0"
+                android:progressDrawable="@drawable/mine_index_progress_bg" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingRight="20dp">
+
             <TextView
                 android:id="@+id/loveNum"
-                style="@style/centerTextView"
-                android:layout_weight="1"
-                android:text=":"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/_222222" />
+
+            <ProgressBar
+                android:id="@+id/loveBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginLeft="10dp"
+                android:max="100"
+                android:progress="0"
+                android:progressDrawable="@drawable/mine_index_progress_bg" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingRight="20dp">
+
             <TextView
                 android:id="@+id/businessNum"
-                style="@style/centerTextView"
-                android:layout_weight="1"
-                android:text=":"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/_222222" />
+
+            <ProgressBar
+                android:id="@+id/businessBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginLeft="10dp"
+                android:max="100"
+                android:progress="0"
+                android:progressDrawable="@drawable/mine_index_progress_bg" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingRight="20dp">
+
             <TextView
                 android:id="@+id/financeNum"
-                style="@style/centerTextView"
-                android:layout_weight="1"
-                android:text=":"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/_222222" />
+
+            <ProgressBar
+                android:id="@+id/moneyBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginLeft="10dp"
+                android:max="100"
+                android:progress="0"
+                android:progressDrawable="@drawable/mine_index_progress_bg" />
         </LinearLayout>
+
         <TextView
             android:id="@+id/luckNum"
             style="@style/centerTextView"
-            android:text=":"/>
+            android:text="" />
+
         <TextView
             android:id="@+id/tip"
             style="@style/centerTextView"
-            android:text=""/>
+            android:text="" />
     </LinearLayout>
+
     <TextView
         android:id="@+id/settingTv"
         android:layout_width="match_parent"
-        android:text="设置"
+        android:layout_height="40dp"
         android:gravity="center_vertical"
         android:paddingLeft="15dp"
-        android:layout_height="40dp" />
+        android:visibility="gone"
+        android:text="设置" />
+
+    <TextView
+        android:id="@+id/handleSettingTv"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:visibility="gone"
+        android:text="行为习惯设置" />
 </LinearLayout>

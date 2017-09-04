@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 
 import com.ep.energy.crash.CrashHandler;
+import com.umeng.socialize.PlatformConfig;
+import com.umeng.socialize.UMShareAPI;
 
 import okhttp3.OkHttpClient;
 
@@ -34,6 +36,14 @@ public class EApplication extends Application {
 
         crashHandler = CrashHandler.getInstance();
         crashHandler.init(true, false);
+
+        initShare();
+        UMShareAPI.get(this);
+    }
+    private void initShare(){
+        PlatformConfig.setWeixin("wx967daebe835fbeac", "5bb696d9ccd75a38c8a0bfe0675559b3");
+        PlatformConfig.setQQZone("1106393142", "jfHUwyz1pPjDO4aJ");
+        PlatformConfig.setSinaWeibo("172945907", "58a9a7c97cc11c1bbd1d83672c9f8429", "http://sns.whalecloud.com");
     }
 
     private void initRequest() {
