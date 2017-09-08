@@ -2,47 +2,62 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/transparent"
-    android:gravity="right|bottom"
-    android:orientation="vertical">
+    android:background="@color/transparent_80"
+    android:orientation="vertical"
+    android:paddingTop="20dp">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:paddingBottom="20dp"
-        android:paddingRight="20dp">
+        android:paddingBottom="20dp">
 
         <ImageView
             android:id="@+id/shareQQ"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:background="@drawable/share_trench_circle_bg"
             android:contentDescription="@null"
             android:src="@mipmap/qq" />
+
+        <ImageView
+            android:id="@+id/shareQZone"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/share_trench_circle_bg"
+            android:contentDescription="@null"
+            android:src="@mipmap/share_qzone" />
 
         <ImageView
             android:id="@+id/shareWX"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
+            android:background="@drawable/share_trench_circle_bg"
             android:contentDescription="@null"
-            android:src="@mipmap/wx" />
+            android:src="@mipmap/wx"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/shareCircle"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
+            android:background="@drawable/share_trench_circle_bg"
             android:contentDescription="@null"
-            android:src="@mipmap/wxcircle" />
+            android:src="@mipmap/wxcircle"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/shareSina"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
+            android:background="@drawable/share_trench_circle_bg"
             android:contentDescription="@null"
-            android:src="@mipmap/sina" />
+            android:src="@mipmap/sina"
+            android:visibility="gone" />
     </LinearLayout>
 </LinearLayout>

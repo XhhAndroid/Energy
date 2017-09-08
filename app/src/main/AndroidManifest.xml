@@ -67,6 +67,7 @@
         <activity
             android:name=".activity.ShareActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/UMDialog"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".dialog.SelectConstellationActivity"

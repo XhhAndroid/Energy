@@ -5,12 +5,14 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Message;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.GeolocationPermissions;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 
 import com.ep.energy.BaseActivity;
 import com.ep.energy.R;
@@ -27,6 +29,8 @@ public class NewsWebActivity extends BaseActivity {
 
     @Bind(R.id.webview)
     WebView mWebView;
+    @Bind(R.id.shareMenu)
+    ImageView shareMenu;
 
     private String mUrl = "";
     private String mTitle = "";
@@ -41,7 +45,7 @@ public class NewsWebActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         mUrl = getIntent().getStringExtra(URL);
-        mTitle = getIntent().getStringExtra(TITLE);
+//        mTitle = getIntent().getStringExtra(TITLE);
 
         WebSettings mWebSettings = mWebView.getSettings();
         mWebSettings.setSupportZoom(true);
@@ -65,8 +69,14 @@ public class NewsWebActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
+        shareMenu.setVisibility(View.VISIBLE);
         doubleClickFinish();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        shareMenu.setVisibility(View.GONE);
     }
 
     /**
@@ -130,6 +140,12 @@ public class NewsWebActivity extends BaseActivity {
         }
 
         @Override
+        public void onReceivedTitle(WebView view, String title) {
+            super.onReceivedTitle(view, title);
+            mTitle = title;
+        }
+
+        @Override
         public void onGeolocationPermissionsHidePrompt() {
             super.onGeolocationPermissionsHidePrompt();
         }
@@ -179,6 +195,9 @@ public class NewsWebActivity extends BaseActivity {
 
     @OnClick(R.id.shareMenu)
     public void onViewClicked() {
-        startActivity(new Intent(NewsWebActivity.this, ShareActivity.class));
+        startActivity(new Intent(NewsWebActivity.this, ShareActivity.class)
+                .putExtra(ShareActivity.SHARECONTEXT, mTitle)
+                .putExtra(ShareActivity.SHARETITLE, "正能量传递")
+                .putExtra(ShareActivity.SHARETARGETURL, mUrl));
     }
 }

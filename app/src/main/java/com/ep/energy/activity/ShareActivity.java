@@ -1,5 +1,6 @@
 package com.ep.energy.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,6 +16,7 @@ import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.media.UMWeb;
 
 import java.util.Map;
 
@@ -25,8 +27,16 @@ import butterknife.OnClick;
  * Created by zhangxiaohui on 2017/9/4.
  */
 
-public class ShareActivity extends BaseActivity {
+public class ShareActivity extends Activity {
     ShareAction shareAction;
+
+    private String shareContext = "";
+    private String shareTitle = "";
+    private String shareTargetUrl = "";
+
+    public static final String SHARECONTEXT = "shareContext";
+    public static final String SHARETITLE = "shareTitle";
+    public static final String SHARETARGETURL = "shareTargetUrl";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,19 +44,31 @@ public class ShareActivity extends BaseActivity {
         setContentView(R.layout.share_layout);
         ButterKnife.bind(this);
 
+        shareTitle = getIntent().getStringExtra(SHARETITLE);
+        shareContext = getIntent().getStringExtra(SHARECONTEXT);
+        shareTargetUrl = getIntent().getStringExtra(SHARETARGETURL);
+
         Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.mipmap.ic_launcher);
         UMImage image = new UMImage(ShareActivity.this, bitmap);
         shareAction = new ShareAction(ShareActivity.this);
-        shareAction.withText("energy")
-                .withMedia(image)
+        UMWeb web2 = new UMWeb(shareTargetUrl);
+        web2.setTitle(shareTitle);
+        web2.setDescription(shareContext);
+        web2.setThumb(image);
+        shareAction.withText(shareContext)
+                .withMedia(web2)
                 .setCallback(umShareListener);
     }
 
-    @OnClick({R.id.shareQQ, R.id.shareWX, R.id.shareCircle, R.id.shareSina})
+    @OnClick({R.id.shareQQ, R.id.shareQZone,R.id.shareWX, R.id.shareCircle, R.id.shareSina})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.shareQQ:
                 shareAction.setPlatform(SHARE_MEDIA.QQ)//传入平台
+                        .share();
+                break;
+            case R.id.shareQZone:
+                shareAction.setPlatform(SHARE_MEDIA.QZONE)//传入平台
                         .share();
                 break;
             case R.id.shareWX:

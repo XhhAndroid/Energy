@@ -10,12 +10,13 @@
         android:layout_height="match_parent"/>
     <ImageView
         android:id="@+id/shareMenu"
-        android:layout_width="38dp"
+        android:layout_width="48dp"
         android:contentDescription="@null"
         android:src="@mipmap/neww_share_btn"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:visibility="gone"
+        android:background="@drawable/news_web_share_btn_bg"
         android:layout_margin="20dp"
-        android:layout_height="38dp" />
+        android:padding="5dp"
+        android:layout_height="48dp" />
 </RelativeLayout>
