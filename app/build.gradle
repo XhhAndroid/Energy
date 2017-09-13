@@ -3,7 +3,6 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 22
     buildToolsVersion '22.0.1'
-
     defaultConfig {
         applicationId "com.ep.energy"
         minSdkVersion 15
@@ -15,12 +14,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            manifestPlaceholders = [GAODE_MAP:"2a0161558b35d3da740470b5fad16785"]
+            manifestPlaceholders = [GAODE_MAP: "2a0161558b35d3da740470b5fad16785"]
         }
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            manifestPlaceholders = [GAODE_MAP:"2a0161558b35d3da740470b5fad16785"]
+            manifestPlaceholders = [GAODE_MAP: "2a0161558b35d3da740470b5fad16785"]
         }
     }
     signingConfigs {
@@ -32,9 +31,21 @@ android {
         }
         release {
             storeFile file("energy.jks")
-            storePassword "energy"
+            if(System.console())
+            storePassword System.console().readLine("\nKeystore password: ")
             keyAlias "energy.jks"
-            keyPassword "energy"
+            if(System.console())
+            keyPassword System.console().readLine("\nKey password: ")
+        }
+    }
+    productFlavors {
+        YingYongBao {
+            versionName 'V1.2'
+            minSdkVersion 15
+            applicationId 'com.ep.energy'
+            targetSdkVersion 22
+            versionCode 3
+            signingConfig signingConfigs.release
         }
     }
 }
