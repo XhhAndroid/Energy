@@ -14,11 +14,17 @@ import com.ep.energy.R;
 import com.ep.energy.activity.NewsWebActivity;
 import com.ep.energy.adapter.EnergyAdapter;
 import com.ep.energy.bean.PositivityModel;
-import com.ep.energy.presenter.PositiveEnergyPre;
-import com.ep.energy.viewInterface.PositiveEnergyView;
+import com.ep.energy.db.DbManger;
+import com.ep.energy.db.model.NewsInfo;
+import com.ep.energy.http.OkHttpManager;
+import com.ep.energy.http.ValueParam;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -27,7 +33,7 @@ import butterknife.ButterKnife;
  * 首页
  * Created by Administrator on 2015/10/24.
  */
-public class FrgPositiveenergy extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, PositiveEnergyView {
+public class FrgPositiveenergy extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
     @Bind(R.id.listview)
     ListView listview;
     @Bind(R.id.swiperefrelayout)
@@ -40,8 +46,6 @@ public class FrgPositiveenergy extends BaseFragment implements SwipeRefreshLayou
     private EnergyAdapter energyAdapter;
     private List<PositivityModel.ResultBean.ListBean> positivityList = new ArrayList<>();
 
-    private PositiveEnergyPre positiveEnergyPre;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.e_positiveenergy, container, false);
@@ -51,8 +55,9 @@ public class FrgPositiveenergy extends BaseFragment implements SwipeRefreshLayou
         initAdapter();
 
         showLoading();
-        positiveEnergyPre = new PositiveEnergyPre(this);
-        positiveEnergyPre.getPositiveEnergyData(true);
+//        positiveEnergyPre = new PositiveEnergyPre(this);
+//        positiveEnergyPre.getPositiveEnergyData(true);
+        requestPositiveData(true);
 
         listview.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
@@ -84,6 +89,44 @@ public class FrgPositiveenergy extends BaseFragment implements SwipeRefreshLayou
 
     }
 
+    private void requestPositiveData(final boolean fresh) {
+        String url = "http://v.juhe.cn/weixin/query";
+        List<ValueParam> params = new ArrayList<>();
+        params.add(new ValueParam("pno", String.valueOf(curPage)));
+        params.add(new ValueParam("ps", String.valueOf(PageSize)));
+        params.add(new ValueParam("key", "0e86536e1934ebc5bbc1c299b0bc2093"));
+        OkHttpManager.okHttpCall_POST(getActivity(), url, params, new OkHttpManager.HttpListner() {
+            @Override
+            public void onStart() {
+                if (fresh) {
+                    dialogShow();
+                }
+            }
+
+            @Override
+            public void onSuccess(final String response) {
+                dialogMiss();
+                if (fresh) {
+                    refreshFinish();
+                }
+                Gson gson = new Gson();
+                Type type = new TypeToken<PositivityModel>() {
+                }.getType();
+                PositivityModel positivityModel = gson.fromJson(response, type);
+                if (positivityModel != null) {
+                    if (positivityModel.getError_code() == 0) {
+                        suceessData(positivityModel);
+                    }
+                }
+            }
+
+            @Override
+            public void onFail(String message) {
+                dialogMiss();
+            }
+        });
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -104,62 +147,58 @@ public class FrgPositiveenergy extends BaseFragment implements SwipeRefreshLayou
     public void LoadMore() {
         refresh = false;
         curPage++;
-        positiveEnergyPre.getPositiveEnergyData(false);
+        requestPositiveData(false);
     }
 
     @Override
     public void onRefresh() {
         curPage = 1;
         refresh = true;
-        positiveEnergyPre.getPositiveEnergyData(true);
+        requestPositiveData(true);
     }
 
-    @Override
-    public BaseFragment Activity() {
-        return this;
-    }
 
-    @Override
-    public int curPage() {
-        return curPage;
-    }
-
-    @Override
-    public int pageSize() {
-        return PageSize;
-    }
-
-    @Override
-    public boolean refresh() {
-        return refresh;
-    }
-
-    @Override
     public void dialogShow() {
         showLoading();
     }
 
-    @Override
     public void dialogMiss() {
         dissmissLoading();
     }
 
-    @Override
     public void refreshFinish() {
         refreshLayout.setRefreshing(false);
     }
 
-    @Override
+    int addPosition = 8;
+    CopyOnWriteArrayList<NewsInfo> newsInfoList = new CopyOnWriteArrayList<>();
+
     public void suceessData(PositivityModel positivityModel) {
         if (positivityModel.getError_code() == 0) {
             if (refresh) {
+                addPosition = 8;
+                newsInfoList.clear();
+                newsInfoList.addAll(DbManger.findNewsInfoAll());
                 positivityList.clear();
                 if (energyAdapter != null)
                     energyAdapter.notifyDataSetChanged();
             }
             positivityList.addAll(positivityModel.getResult().getList());
-            if (energyAdapter != null)
+            for (NewsInfo newsInfo : newsInfoList) {
+                PositivityModel.ResultBean.ListBean listBean = new PositivityModel.ResultBean.ListBean();
+                listBean.setFirstImg(newsInfo.getThumbnail());
+                listBean.setTitle(newsInfo.getNewsTitle());
+                listBean.setSource("Energy");
+                listBean.setUrl(newsInfo.getNewsUrl());
+                if (positivityList.size() > addPosition) {
+                    positivityList.add(addPosition, listBean);
+                    addPosition *= 2;
+                    newsInfoList.remove(newsInfo);
+                }
+            }
+            if (energyAdapter != null) {
                 energyAdapter.notifyDataSetChanged();
+            }
         }
     }
 }

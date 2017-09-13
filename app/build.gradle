@@ -43,4 +43,5 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile project(':zlibrary')
+    compile 'org.litepal.android:core:1.4.1'
 }

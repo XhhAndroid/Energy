@@ -43,7 +43,7 @@ public class EnergyAdapter extends EBaseAdapter<PositivityModel.ResultBean.ListB
                     .load(positivityModel.getFirstImg())
                     .placeholder(R.drawable.energy_default_img)
                     .crossFade()
-                    .animate(AnimationUtils.loadAnimation(mContext,R.anim.load_img_animal))
+                    .animate(AnimationUtils.loadAnimation(mContext, R.anim.load_img_animal))
                     .into(holder.positiveImg);
         }
         convertView.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +52,6 @@ public class EnergyAdapter extends EBaseAdapter<PositivityModel.ResultBean.ListB
                 onclickListner.onClick0(v, positivityModel, position);
             }
         });
-
         return convertView;
     }
 

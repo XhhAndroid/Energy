@@ -41,7 +41,7 @@ public class EBaseAdapter<T> extends BaseAdapter{
 
     @Override
     public Object getItem(int position) {
-        return this.dataList == null ? null : this.dataList.get(position);
+        return dataList.get(position);
     }
 
     @Override
