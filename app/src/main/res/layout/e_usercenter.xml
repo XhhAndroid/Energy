@@ -154,6 +154,9 @@
             style="@style/centerTextView"
             android:text="" />
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="15dp"/>
 
     <TextView
         android:id="@+id/settingTv"
@@ -172,4 +175,13 @@
         android:paddingLeft="15dp"
         android:visibility="gone"
         android:text="行为习惯设置" />
+
+    <TextView
+        android:id="@+id/messageTv"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:background="@drawable/them_tvbutton_bg"
+        android:text="我的消息" />
 </LinearLayout>

@@ -17,6 +17,7 @@ import com.ep.energy.Constact;
 import com.ep.energy.R;
 import com.ep.energy.SharePrefrenceUtil;
 import com.ep.energy.activity.OOMLogActivity;
+import com.ep.energy.activity.UserMessageActivity;
 import com.ep.energy.bean.UserCenterBean;
 import com.ep.energy.dialog.SelectConstellationActivity;
 import com.ep.energy.presenter.UserCenterPre;
@@ -126,7 +127,8 @@ public class FrgUserCenter extends BaseFragment implements UserCenterView {
         tip.setText(centerBean.getSummary());
     }
 
-    @OnClick({R.id.constellationImg, R.id.constellation, R.id.settingTv, R.id.handleSettingTv})
+    @OnClick({R.id.constellationImg, R.id.constellation, R.id.settingTv, R.id.handleSettingTv
+            , R.id.messageTv})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.constellationImg:
@@ -139,6 +141,9 @@ public class FrgUserCenter extends BaseFragment implements UserCenterView {
                 break;
             case R.id.handleSettingTv:// TODO: 2017/9/4 行为习惯设置
 
+                break;
+            case R.id.messageTv:
+                startActivity(new Intent(getActivity(), UserMessageActivity.class));
                 break;
         }
     }

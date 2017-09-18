@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="topbar">
+        <attr name="showLeftMenu" format="boolean"/>
+        <attr name="showRightMenu" format="boolean"/>
+    </declare-styleable>
+
+</resources>
