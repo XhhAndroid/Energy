@@ -1,6 +1,5 @@
 package com.ep.energy.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
@@ -18,12 +17,15 @@ import com.ep.energy.db.DbManger;
 import com.ep.energy.db.model.NewsInfo;
 import com.ep.energy.http.OkHttpManager;
 import com.ep.energy.http.ValueParam;
+import com.ep.energy.jumpUtils.JumpUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import butterknife.Bind;
@@ -138,9 +140,14 @@ public class FrgPositiveenergy extends BaseFragment implements SwipeRefreshLayou
         super.onClick0(v, o, position);
         if (o != null) {
             PositivityModel.ResultBean.ListBean listBean = (PositivityModel.ResultBean.ListBean) o;
-            startActivity(new Intent(getActivity(), NewsWebActivity.class)
-                    .putExtra(NewsWebActivity.URL, listBean.getUrl())
-                    .putExtra(NewsWebActivity.TITLE, listBean.getTitle()));
+//            startActivity(new Intent(getActivity(), NewsWebActivity.class)
+//                    .putExtra(NewsWebActivity.URL, listBean.getUrl())
+//                    .putExtra(NewsWebActivity.TITLE, listBean.getTitle()));
+            Map<String, String> stringMap = new HashMap<>();
+            stringMap.put(JumpUtil.ToActivity, JumpUtil.WebNews);
+            stringMap.put(NewsWebActivity.URL, listBean.getUrl());
+            stringMap.put(NewsWebActivity.TITLE, listBean.getTitle());
+            JumpUtil.ToActivity(getActivity(),stringMap);
         }
     }
 

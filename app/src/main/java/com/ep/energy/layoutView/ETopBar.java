@@ -47,8 +47,10 @@ public class ETopBar extends LinearLayout {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.topbar);
         showLeftMenu = ta.getBoolean(R.styleable.topbar_showLeftMenu, false);
         showRightMenu = ta.getBoolean(R.styleable.topbar_showRightMenu, false);
+        String title = ta.getString(R.styleable.topbar_showTitle);
         ta.recycle();
         initView(context);
+        viewHolder.middle.setText(title);
     }
 
     private void initView(Context context) {

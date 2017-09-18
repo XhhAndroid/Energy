@@ -3,6 +3,7 @@
     <declare-styleable name="topbar">
         <attr name="showLeftMenu" format="boolean"/>
         <attr name="showRightMenu" format="boolean"/>
+        <attr name="showTitle" format="string"/>
     </declare-styleable>
 
 </resources>

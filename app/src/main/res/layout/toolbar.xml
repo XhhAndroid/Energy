@@ -43,7 +43,6 @@
                 android:id="@+id/middle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="EP标榜"
                 android:textColor="#EA8010"
                 android:textSize="15sp" />
         </RelativeLayout>
