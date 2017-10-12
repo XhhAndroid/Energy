@@ -173,7 +173,6 @@
         android:layout_height="40dp"
         android:gravity="center_vertical"
         android:paddingLeft="15dp"
-        android:visibility="gone"
         android:text="行为习惯设置" />
 
     <TextView
@@ -184,4 +183,13 @@
         android:paddingLeft="15dp"
         android:background="@drawable/them_tvbutton_bg"
         android:text="我的消息" />
+    <TextView
+        android:id="@+id/showDbValue"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/_222222"
+        android:paddingLeft="15dp"
+        android:text="全国车牌"
+        android:background="@drawable/them_tvbutton_bg" />
 </LinearLayout>

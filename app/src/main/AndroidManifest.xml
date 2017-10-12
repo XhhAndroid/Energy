@@ -93,11 +93,15 @@
             android:theme="@style/ImageTranslucentTheme"
             android:windowSoftInputMode="adjustPan" />
         <activity
+            android:name=".activity.PlateNumberActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ImageTranslucentTheme"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
             android:name=".dialog.SelectConstellationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/UMDialog"
             android:windowSoftInputMode="adjustPan" />
-
         <!--###############################分享专用activity#################################-->
         <activity
             android:name="com.umeng.socialize.media.WBShareCallBackActivity"

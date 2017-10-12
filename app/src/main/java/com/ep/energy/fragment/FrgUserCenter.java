@@ -2,7 +2,6 @@ package com.ep.energy.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +16,7 @@ import com.ep.energy.Constact;
 import com.ep.energy.R;
 import com.ep.energy.SharePrefrenceUtil;
 import com.ep.energy.activity.OOMLogActivity;
-import com.ep.energy.activity.UserMessageActivity;
+import com.ep.energy.activity.PlateNumberActivity;
 import com.ep.energy.bean.UserCenterBean;
 import com.ep.energy.dialog.SelectConstellationActivity;
 import com.ep.energy.presenter.UserCenterPre;
@@ -57,6 +56,8 @@ public class FrgUserCenter extends BaseFragment implements UserCenterView {
     ProgressBar businessBar;
     @Bind(R.id.moneyBar)
     ProgressBar moneyBar;
+    @Bind(R.id.showDbValue)
+    TextView showDbValue;
 
     private UserCenterPre userCenterPre;
 
@@ -128,7 +129,7 @@ public class FrgUserCenter extends BaseFragment implements UserCenterView {
     }
 
     @OnClick({R.id.constellationImg, R.id.constellation, R.id.settingTv, R.id.handleSettingTv
-            , R.id.messageTv})
+            , R.id.messageTv, R.id.showDbValue})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.constellationImg:
@@ -143,7 +144,12 @@ public class FrgUserCenter extends BaseFragment implements UserCenterView {
 
                 break;
             case R.id.messageTv:
-                startActivity(new Intent(getActivity(), UserMessageActivity.class));
+//                startActivity(new Intent(getActivity(), UserMessageActivity.class));
+//                LocalDbManager.imporDatabase();
+//                readTextByFileInputStream();
+                break;
+            case R.id.showDbValue:
+                startActivity(new Intent(getActivity(), PlateNumberActivity.class));
                 break;
         }
     }

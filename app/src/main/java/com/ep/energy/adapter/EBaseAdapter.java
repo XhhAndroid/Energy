@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.ep.energy.interfaces.imterfaceImp.BaseAdapterListner;
+
 import java.util.List;
 
 /**
@@ -16,8 +18,14 @@ public class EBaseAdapter<T> extends BaseAdapter{
     public LayoutInflater inflater = null;
     public List<T> dataList;
     public OnclickListner onclickListner;
+    public BaseAdapterListner baseAdapterListner;
 
     public EBaseAdapter(Context mContext) {
+        this.mContext = mContext;
+        inflater = LayoutInflater.from(mContext);
+    }
+    public EBaseAdapter(BaseAdapterListner<T> onclickListner, Context mContext) {
+        this.baseAdapterListner = onclickListner;
         this.mContext = mContext;
         inflater = LayoutInflater.from(mContext);
     }
