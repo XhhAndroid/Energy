@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.GridView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.ep.energy.BaseActivity;
@@ -29,7 +28,9 @@ public class PlateNumberActivity extends BaseActivity {
     @Bind(R.id.shortName)
     GridView shortNameListView;
     @Bind(R.id.cityName)
-    ListView cityNameListView;
+    TextView cityName;
+    @Bind(R.id.cityStory)
+    TextView cityStory;
     @Bind(R.id.previewCityName)
     TextView previewCityName;
 
@@ -38,9 +39,6 @@ public class PlateNumberActivity extends BaseActivity {
 
     List<PlateNumberInfo> charNameList = new ArrayList<>();
     PlateNumberAdapter charNameAdapter;
-
-    List<PlateNumberInfo> cityNameList = new ArrayList<>();
-    PlateNumberAdapter cityNameAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +56,9 @@ public class PlateNumberActivity extends BaseActivity {
             @Override
             public void onClick0(View v, PlateNumberInfo plateNumberInfo, int position) {
                 super.onClick0(v, plateNumberInfo, position);
-                cityNameList.clear();
-                cityNameList.addAll(localDbManager.findByCharName(plateNumberInfo.getCity_short_name(), plateNumberInfo.getCity_plate_letter()));
-                cityNameAdapter.notifyDataSetChanged();
+                PlateNumberInfo plateNumberInfo1 = localDbManager.findByCharName(plateNumberInfo.getCity_short_name(), plateNumberInfo.getCity_plate_letter());
+                cityName.setText(plateNumberInfo1.getCity_name() + "(" + plateNumberInfo1.getCity_remark() + ")");
+                cityStory.setText(plateNumberInfo1.getCity_story());
             }
 
             @Override
@@ -73,12 +71,13 @@ public class PlateNumberActivity extends BaseActivity {
                 }
             }
         }, this);
-        cityNameAdapter = new PlateNumberAdapter(this);
 
         shortNameListView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                pressed = (event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_MOVE);
+                pressed = (event.getAction() == MotionEvent.ACTION_DOWN
+                        || event.getAction() == MotionEvent.ACTION_MOVE
+                        || event.getAction() == MotionEvent.ACTION_SCROLL);
                 return false;
             }
         });
@@ -86,7 +85,7 @@ public class PlateNumberActivity extends BaseActivity {
 
     private void initDataBase() {
         if (!localDbManager.tabIsExist(LocalDbManager.TAB_NAME)) {
-            localDbManager.readTextByFileInputStream(new LocalDbhandlerListner() {
+            localDbManager.imporDatabase(new LocalDbhandlerListner() {
                 @Override
                 public void importDbSuccess() {
                     super.importDbSuccess();
@@ -111,9 +110,5 @@ public class PlateNumberActivity extends BaseActivity {
         charNameAdapter.setList(charNameList);
         shortNameListView.setAdapter(charNameAdapter);
         charNameAdapter.setContentType(PlateNumberAdapter.CHAR_NAME);
-
-        cityNameAdapter.setList(cityNameList);
-        cityNameListView.setAdapter(cityNameAdapter);
-        cityNameAdapter.setContentType(PlateNumberAdapter.CITY_NAME);
     }
 }

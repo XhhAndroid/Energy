@@ -11,6 +11,15 @@ public class PlateNumberInfo {
     private String city_province;
     private String city_remark;
     private String city_plate_color;
+    private String city_story;
+
+    public String getCity_story() {
+        return city_story == null ? "" : city_story;
+    }
+
+    public void setCity_story(String city_story) {
+        this.city_story = city_story;
+    }
 
     public String getCity_name() {
         return city_name == null ? "" : city_name;

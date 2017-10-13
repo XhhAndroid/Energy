@@ -105,7 +105,7 @@ public class LocalDbManager {
      * @return
      */
     public List<PlateNumberInfo> findAllData() {
-        Cursor cursor = db.rawQuery("select * from plant_number", null);
+        Cursor cursor = db.rawQuery("select * from plant_number order by city_name", null);
         List<PlateNumberInfo> plateNumberInfoList = new ArrayList<>();
         if (cursor != null) {
             while (cursor.moveToNext()) {
@@ -117,6 +117,7 @@ public class LocalDbManager {
                 String city_province = cursor.getString(cursor.getColumnIndex("city_province"));
                 String city_remark = cursor.getString(cursor.getColumnIndex("city_remark"));
                 String city_plate_color = cursor.getString(cursor.getColumnIndex("city_plate_color"));
+                String city_story = cursor.getString(cursor.getColumnIndex("city_story"));
 
                 LogZ.e("id=" + id
                         + " | city_name=" + city_name
@@ -131,6 +132,7 @@ public class LocalDbManager {
                 plateNumberInfo.setCity_province(city_province);
                 plateNumberInfo.setCity_remark(city_remark);
                 plateNumberInfo.setCity_plate_color(city_plate_color);
+                plateNumberInfo.setCity_story(city_story);
 
                 plateNumberInfoList.add(plateNumberInfo);
             }
@@ -139,18 +141,18 @@ public class LocalDbManager {
         return plateNumberInfoList;
     }
 
-    public List<PlateNumberInfo> findByCharName(String shortName, String letter) {
+    public PlateNumberInfo findByCharName(String shortName, String letter) {
         Cursor cursor = db.rawQuery("select * from plant_number where city_short_name = ? and city_plate_letter = ?", new String[]{shortName, letter});
-        List<PlateNumberInfo> plateNumberInfoList = new ArrayList<>();
+        PlateNumberInfo plateNumberInfo = new PlateNumberInfo();
         if (cursor != null) {
             while (cursor.moveToNext()) {
-                PlateNumberInfo plateNumberInfo = new PlateNumberInfo();
                 String city_name = cursor.getString(cursor.getColumnIndex("city_name"));
                 String city_short_name = cursor.getString(cursor.getColumnIndex("city_short_name"));
                 String city_plate_letter = cursor.getString(cursor.getColumnIndex("city_plate_letter"));
                 String city_province = cursor.getString(cursor.getColumnIndex("city_province"));
                 String city_remark = cursor.getString(cursor.getColumnIndex("city_remark"));
                 String city_plate_color = cursor.getString(cursor.getColumnIndex("city_plate_color"));
+                String city_story = cursor.getString(cursor.getColumnIndex("city_story"));
 
                 plateNumberInfo.setCity_name(city_name);
                 plateNumberInfo.setCity_short_name(city_short_name);
@@ -158,12 +160,12 @@ public class LocalDbManager {
                 plateNumberInfo.setCity_province(city_province);
                 plateNumberInfo.setCity_remark(city_remark);
                 plateNumberInfo.setCity_plate_color(city_plate_color);
+                plateNumberInfo.setCity_story(city_story);
 
-                plateNumberInfoList.add(plateNumberInfo);
             }
             cursor.close();
         }
-        return plateNumberInfoList;
+        return plateNumberInfo;
     }
 
     public void readTextByFileInputStream(LocalDbhandlerListner localDbhandlerListner) {
@@ -212,6 +214,7 @@ public class LocalDbManager {
                 contentValues.put("city_province", provienceAllName.trim());
                 contentValues.put("city_remark", remark[1].trim());
                 contentValues.put("city_plate_color", "#2882e0");
+                contentValues.put("city_story","");
                 db.insert("plant_number", null, contentValues);
             }
         }
