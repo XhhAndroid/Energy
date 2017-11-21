@@ -30,6 +30,7 @@
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
 
 
     <!--################ 极光相关的权限配置 ################-->
@@ -142,6 +143,17 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!--########################广告配置##################-->
+        <activity
+            android:name="com.dgs.kfi.ckann"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <service
+            android:name="com.dgs.kfi.aeeebt"
+            android:process=":xrzxvf" />
         <!--##############################极光推送专用#################-->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->
         <service
