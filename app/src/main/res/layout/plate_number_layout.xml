@@ -7,26 +7,33 @@
         android:id="@+id/shortName"
         android:layout_width="match_parent"
         android:layout_height="240dp"
-        android:numColumns="4"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true"
+        android:numColumns="4" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="240dp"
-        android:orientation="horizontal">
+        android:layout_marginTop="60dp"
+        android:orientation="vertical">
 
-        <ListView
+        <TextView
             android:id="@+id/cityName"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="60dp"
+            android:textColor="@color/_222222" />
+
+        <TextView
+            android:id="@+id/cityStory"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/_222222" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/previewCityName"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginLeft="100dp"
         android:gravity="center"
         android:textSize="18sp" />
 </RelativeLayout>

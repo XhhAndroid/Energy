@@ -8,6 +8,7 @@ import android.text.TextUtils;
 
 import com.ep.energy.EApplication;
 import com.ep.energy.db.DbManger;
+import com.ep.energy.db.model.ArtWareData;
 import com.ep.energy.db.model.NewsInfo;
 
 import org.json.JSONException;
@@ -107,6 +108,23 @@ public class JpushReceiver extends BroadcastReceiver {
                     }
                 }else if("msg_type=delAll".equals(message)){
                     DbManger.deleteAllData();
+                }else if("msg_type=artImage".equals(message)){
+                    ArtWareData artWareData = new ArtWareData();
+                    try {
+                        JSONObject jsonObject = new JSONObject(extras);
+                        if (jsonObject.has("artId")) {
+                            artWareData.setArtId((String) jsonObject.get("artId"));
+                        }
+                        if (jsonObject.has("artTitle")) {
+                            artWareData.setArtTitle((String) jsonObject.get("artTitle"));
+                        }
+                        if (jsonObject.has("artImgUrl")) {
+                            artWareData.setArtImgUrl((String) jsonObject.get("artImgUrl"));
+                        }
+                        DbManger.saveArtWare(artWareData);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }

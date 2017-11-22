@@ -76,8 +76,7 @@ public class PlateNumberActivity extends BaseActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 pressed = (event.getAction() == MotionEvent.ACTION_DOWN
-                        || event.getAction() == MotionEvent.ACTION_MOVE
-                        || event.getAction() == MotionEvent.ACTION_SCROLL);
+                        || event.getAction() == MotionEvent.ACTION_MOVE);
                 return false;
             }
         });

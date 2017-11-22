@@ -15,6 +15,7 @@ import com.ep.energy.BaseFragment;
 import com.ep.energy.Constact;
 import com.ep.energy.R;
 import com.ep.energy.SharePrefrenceUtil;
+import com.ep.energy.activity.ArtWareActivity;
 import com.ep.energy.activity.OOMLogActivity;
 import com.ep.energy.activity.PlateNumberActivity;
 import com.ep.energy.bean.UserCenterBean;
@@ -129,7 +130,7 @@ public class FrgUserCenter extends BaseFragment implements UserCenterView {
     }
 
     @OnClick({R.id.constellationImg, R.id.constellation, R.id.settingTv, R.id.handleSettingTv
-            , R.id.messageTv, R.id.showDbValue})
+            , R.id.messageTv, R.id.showDbValue,R.id.artwareTv})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.constellationImg:
@@ -150,6 +151,9 @@ public class FrgUserCenter extends BaseFragment implements UserCenterView {
                 break;
             case R.id.showDbValue:
                 startActivity(new Intent(getActivity(), PlateNumberActivity.class));
+                break;
+            case R.id.artwareTv:
+                startActivity(new Intent(getActivity(), ArtWareActivity.class));
                 break;
         }
     }

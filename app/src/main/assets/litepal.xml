@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <litepal>
     <dbname value="news_tab"/>
-    <version value="1" />//更新数据库版本直接更新数字
+    <version value="2" />//更新数据库版本直接更新数字
     <list>
         <mapping class="com.ep.energy.db.model.NewsInfo"/>
+        <mapping class="com.ep.energy.db.model.ArtWareData"/>
     </list>
 </litepal>

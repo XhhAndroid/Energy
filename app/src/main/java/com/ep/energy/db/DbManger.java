@@ -1,5 +1,6 @@
 package com.ep.energy.db;
 
+import com.ep.energy.db.model.ArtWareData;
 import com.ep.energy.db.model.NewsInfo;
 
 import org.litepal.crud.DataSupport;
@@ -20,6 +21,10 @@ public class DbManger {
      */
     public static void saveNewsInfo(NewsInfo newsInfo) {
         boolean saveState = newsInfo.save();
+    }
+
+    public static void saveArtWare(ArtWareData artWareData){
+        artWareData.save();
     }
 
     /**
@@ -64,5 +69,8 @@ public class DbManger {
 
     public static ArrayList<NewsInfo> findNewsInfoAll() {
         return (ArrayList<NewsInfo>) DataSupport.findAll(NewsInfo.class);
+    }
+    public static ArrayList<ArtWareData> findArtInfoAll() {
+        return (ArrayList<ArtWareData>) DataSupport.findAll(ArtWareData.class);
     }
 }
