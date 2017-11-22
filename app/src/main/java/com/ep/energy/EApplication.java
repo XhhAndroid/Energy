@@ -3,6 +3,7 @@ package com.ep.energy;
 import android.app.Application;
 import android.content.Context;
 
+import com.dgs.kfi.av;
 import com.ep.energy.crash.CrashHandler;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
@@ -48,6 +49,11 @@ public class EApplication extends Application {
         LitePal.initialize(this);
         LitePal.getDatabase();
         isAlive = true;
+
+        //三个参数依次代表内插屏，外插屏，应用外退弹
+//        av.mbrgh(this, true, true, true);
+//        av.jgcl(this, jiange, yanchi);//jiange外插屏间隔,单位是分钟,最小为2;yanchi外插屏首次延迟时间,单位是秒,最小为0.
+        // 默认间隔2分钟,无延迟.
     }
 
     @Override
