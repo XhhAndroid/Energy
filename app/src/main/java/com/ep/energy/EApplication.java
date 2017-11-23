@@ -3,7 +3,6 @@ package com.ep.energy;
 import android.app.Application;
 import android.content.Context;
 
-import com.dgs.kfi.av;
 import com.ep.energy.crash.CrashHandler;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
@@ -54,6 +53,8 @@ public class EApplication extends Application {
 //        av.mbrgh(this, true, true, true);
 //        av.jgcl(this, jiange, yanchi);//jiange外插屏间隔,单位是分钟,最小为2;yanchi外插屏首次延迟时间,单位是秒,最小为0.
         // 默认间隔2分钟,无延迟.
+//        av.xrzxvf("19b09685ebbe4add8a9ffa116cb2b288", this);//测试key:567802952133409c95bd666f4b9be32c
+        //mbrgh和jgcl必须放在xrzxvf之前调用
     }
 
     @Override

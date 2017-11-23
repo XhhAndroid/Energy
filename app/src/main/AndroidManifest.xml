@@ -148,16 +148,16 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!--########################广告配置##################-->
-        <activity
-            android:name="com.dgs.kfi.ckann"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:excludeFromRecents="true"
-            android:launchMode="singleInstance"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!--<activity-->
+            <!--android:name="com.dgs.kfi.ckann"-->
+            <!--android:configChanges="keyboardHidden|orientation|screenSize"-->
+            <!--android:excludeFromRecents="true"-->
+            <!--android:launchMode="singleInstance"-->
+            <!--android:theme="@android:style/Theme.Translucent.NoTitleBar" />-->
 
-        <service
-            android:name="com.dgs.kfi.aeeebt"
-            android:process=":xrzxvf" />
+        <!--<service-->
+            <!--android:name="com.dgs.kfi.aeeebt"-->
+            <!--android:process=":xrzxvf" />-->
         <!--##############################极光推送专用#################-->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->
         <service
