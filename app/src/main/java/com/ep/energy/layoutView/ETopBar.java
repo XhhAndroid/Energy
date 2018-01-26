@@ -115,8 +115,6 @@ public class ETopBar extends LinearLayout {
         ImageView right;
         @Bind(R.id.right_rel)
         RelativeLayout rightRel;
-        @Bind(R.id.m_toolbar)
-        Toolbar mToolbar;
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);

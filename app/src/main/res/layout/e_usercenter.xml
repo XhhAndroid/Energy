@@ -200,6 +200,7 @@
         android:layout_height="55dp"
         android:gravity="center_vertical"
         android:textColor="@color/_222222"
+        android:visibility="gone"
         android:paddingLeft="15dp"
         android:text="工艺品"
         android:background="@drawable/them_tvbutton_bg" />

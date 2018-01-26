@@ -32,8 +32,6 @@ public class MainActivity extends BaseActivity implements PageChange {
     ImageView right;
     @Bind(R.id.right_rel)
     RelativeLayout rightRel;
-    @Bind(R.id.m_toolbar)
-    Toolbar myToolbar;
     @Bind(R.id.jazzy_pager)
     PageSwitchViewpager mJazzy;
 
@@ -46,10 +44,6 @@ public class MainActivity extends BaseActivity implements PageChange {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
-        setSupportActionBar(myToolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) actionBar.setDisplayShowTitleEnabled(false);
 
         setupJazziness(PageSwitchViewpager.TransitionEffect.Tablet);
     }
@@ -79,7 +73,7 @@ public class MainActivity extends BaseActivity implements PageChange {
                 middle.setText("杂志精选");
                 break;
             case 1:
-                middle.setText("历史的今天");
+                middle.setText("历史今天");
                 break;
             case 2:
                 middle.setText("个人中心");
