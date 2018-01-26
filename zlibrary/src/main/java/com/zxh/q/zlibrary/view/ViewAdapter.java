@@ -33,9 +33,8 @@ public class ViewAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         ViewBean vb = viewList.get(position);
 
-        View view = inflater.inflate(vb.getViewroot(), null);
-        container.addView(view, ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
+        View view = inflater.inflate(vb.getViewroot(), container,false);
+        container.addView(view);
         mJazzy.setObjectForPosition(view, position);
 
         return view;

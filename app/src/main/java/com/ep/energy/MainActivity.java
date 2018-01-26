@@ -3,14 +3,12 @@ package com.ep.energy;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zxh.q.zlibrary.bean.ViewBean;
-import com.zxh.q.zlibrary.utils.ToastZ;
 import com.zxh.q.zlibrary.view.PageSwitchViewpager;
 import com.zxh.q.zlibrary.view.ViewAdapter;
 import com.zxh.q.zlibrary.view.interfa.PageChange;
@@ -20,7 +18,6 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity implements PageChange {
     @Bind(R.id.left)
@@ -42,7 +39,7 @@ public class MainActivity extends BaseActivity implements PageChange {
 
     private List<ViewBean> viewlist = new ArrayList<>();
 
-    private int viewl[] = {R.layout.positiveenergy, R.layout.usercenter};//, R.layout.positivemap
+    private int viewl[] = {R.layout.positiveenergy, R.layout.positive_history_today, R.layout.usercenter};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,13 +76,13 @@ public class MainActivity extends BaseActivity implements PageChange {
     public void pageswitch(int position, int size) {
         switch (position % size) {
             case 0:
-                middle.setText("Ep");
+                middle.setText("杂志精选");
                 break;
-//            case 1:
-//                middle.setText("Ep分布");
-//                break;
             case 1:
-                middle.setText("Ep个人中心");
+                middle.setText("历史的今天");
+                break;
+            case 2:
+                middle.setText("个人中心");
                 break;
         }
         show(position % size);
@@ -100,11 +97,11 @@ public class MainActivity extends BaseActivity implements PageChange {
                 leftRel.setVisibility(View.INVISIBLE);
                 rightRel.setVisibility(View.VISIBLE);
                 break;
-//            case 1:
-//                leftRel.setVisibility(View.VISIBLE);
-//                rightRel.setVisibility(View.VISIBLE);
-//                break;
             case 1:
+                leftRel.setVisibility(View.VISIBLE);
+                rightRel.setVisibility(View.VISIBLE);
+                break;
+            case 2:
                 leftRel.setVisibility(View.VISIBLE);
                 rightRel.setVisibility(View.INVISIBLE);
                 break;

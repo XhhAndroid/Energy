@@ -9,20 +9,22 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.ep.energy.R;
+import com.ep.energy.bean.HistoryTodayModel;
 import com.ep.energy.bean.PositivityModel;
+import com.ep.energy.interfaces.imterfaceImp.BaseAdapterListner;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by Administrator on 2015/10/27.
+ * @author Created by zhangxiaohui on 2018/1/26.
  */
-public class EnergyAdapter extends EBaseAdapter<PositivityModel.ResultBean.ListBean> {
 
-    public EnergyAdapter(Context mContext, OnclickListner onclickListner) {
+public class HistoryTodayAdapter extends EBaseAdapter<HistoryTodayModel.HistoryEntity>{
+
+    public HistoryTodayAdapter(BaseAdapterListner<HistoryTodayModel.HistoryEntity> onclickListner, Context mContext) {
         super(onclickListner, mContext);
     }
-
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         super.getView(position, convertView, parent);
@@ -34,26 +36,25 @@ public class EnergyAdapter extends EBaseAdapter<PositivityModel.ResultBean.ListB
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        final PositivityModel.ResultBean.ListBean positivityModel = (PositivityModel.ResultBean.ListBean) getItem(position);
+        final HistoryTodayModel.HistoryEntity positivityModel = (HistoryTodayModel.HistoryEntity) getItem(position);
         if (positivityModel != null) {
-            holder.positiveSor.setText("来自:" + positivityModel.getSource());
+            holder.positiveSor.setText(positivityModel.getYear()+positivityModel.getMonth()+positivityModel.getDay());
             holder.positiveTitle.setText(positivityModel.getTitle());
 
-            if(holder.positiveImg.getTag() == null || !positivityModel.getFirstImg().equals(holder.positiveImg.getTag(R.id.imageUrlTag1))){
+            if(holder.positiveImg.getTag() == null || !positivityModel.getImg().equals(holder.positiveImg.getTag(R.id.imageUrlTag))){
                 Glide.with(mContext)
-                        .load(positivityModel.getFirstImg())
+                        .load(positivityModel.getImg())
                         .placeholder(R.drawable.energy_default_img)
                         .crossFade()
                         .animate(AnimationUtils.loadAnimation(mContext, R.anim.load_img_animal))
                         .into(holder.positiveImg);
             }
-            holder.positiveImg.setTag(R.id.imageUrlTag1,positivityModel.getFirstImg());
-
+            holder.positiveImg.setTag(R.id.imageUrlTag,positivityModel.getImg());
         }
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onclickListner.onClick0(v, positivityModel, position);
+                baseAdapterListner.onClick0(v, positivityModel, position);
             }
         });
         return convertView;
